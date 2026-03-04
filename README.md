@@ -130,3 +130,5 @@ The admin key is validated server-side via `/api/admin/upload`.
 ---
 
 Built with ❤️ by Om Maurya
+
+deploy update
