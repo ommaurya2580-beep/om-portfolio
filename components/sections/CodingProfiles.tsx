@@ -84,7 +84,7 @@ export default function CodingProfiles() {
                         </h3>
                         <div className="space-y-3">
                             <img
-                                src="https://github-readme-stats.vercel.app/api?username=ommaurya2580-beep&show_icons=true&theme=transparent&hide_border=true&title_color=00f5ff&icon_color=bf00ff&text_color=94a3b8&bg_color=00000000"
+                                src="https://github-readme-stats-eight-theta.vercel.app/api?username=ommaurya2580-beep&show_icons=true&theme=transparent&hide_border=true&title_color=00f5ff&icon_color=bf00ff&text_color=94a3b8&bg_color=00000000"
                                 alt="GitHub Stats"
                                 className="w-full rounded-xl"
                                 loading="lazy"
