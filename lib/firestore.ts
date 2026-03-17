@@ -26,6 +26,11 @@ export interface Project {
     images?: string[];
     featured?: boolean;
     certificateUrl?: string;
+    stars?: number;
+    forks?: number;
+    isConfidential?: boolean;
+    badge?: string;
+    repo?: string;
 }
 
 /** Firestore document shape for hackathon / competition entries */

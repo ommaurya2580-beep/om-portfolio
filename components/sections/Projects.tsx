@@ -8,53 +8,83 @@ import { getProjects, type Project } from '@/lib/firestore';
 import ProjectModal from '@/components/ui/ProjectModal';
 import { ProjectCardSkeleton } from '@/components/ui/LoadingSkeleton';
 
-const categories = ['All', 'Web', 'App', 'Hackathon', 'AI', 'Security'];
+const categories = ['All', 'Web App', 'Mobile App', 'AI'];
 
-const fallbackProjects: Project[] = [
+const baseProjects: Partial<Project>[] = [
     {
         id: '1',
-        title: 'Spine & Earn Money',
-        category: 'App',
-        description:
-            'A mobile application focused on helping users earn money through structured engagement features and reward mechanisms. Designed with scalable backend logic and secure handling of user interactions.',
-        techStack: ['JavaScript', 'Firebase', 'Node.js'],
-        githubUrl: 'https://github.com/ommaurya2580-beep',
-        featured: true,
-        createdAt: Timestamp.now(),
+        title: "AKTU Counselling Helper",
+        repo: "aktu-counselling-helper",
+        description: "Web platform to search and filter AKTU counselling cutoffs with optimized performance.",
+        techStack: ["Next.js", "Firebase", "Firestore", "Tailwind"],
+        liveUrl: "https://aktu-counselling-helper.vercel.app",
+        category: "Web App",
+        badge: "Featured Project"
     },
     {
         id: '2',
-        title: 'Weather Web App',
-        category: 'Web',
-        description:
-            'A real-time weather forecasting web application using external weather APIs. Allows city-based search and displays temperature, humidity, and wind data in a clean responsive UI.',
-        techStack: ['HTML', 'CSS', 'JavaScript', 'Weather API'],
-        githubUrl: 'https://github.com/ommaurya2580-beep',
-        featured: true,
-        createdAt: Timestamp.now(),
+        title: "Spin & Earn App",
+        repo: "spin_and_earn",
+        description: "Flutter-based reward spinning mobile app with cross-platform support.",
+        techStack: ["Flutter", "Dart"],
+        category: "Mobile App"
     },
+    {
+        id: '3',
+        title: "ID Face Sync",
+        repo: "id-face-sync",
+        description: "Face recognition-based identity verification system.",
+        techStack: ["React", "Face API", "JavaScript"],
+        category: "AI",
+        isConfidential: true
+    }
 ];
 
 const categoryColors: Record<string, string> = {
-    Web: '#00f5ff',
-    App: '#bf00ff',
-    Hackathon: '#00ff88',
+    'Web App': '#00f5ff',
+    'Mobile App': '#bf00ff',
     AI: '#ffa116',
-    Security: '#ff0080',
 };
 
 export default function Projects() {
-    const [projects, setProjects] = useState<Project[]>(fallbackProjects);
+    const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState('All');
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
 
     useEffect(() => {
-        getProjects().then((data) => {
-            if (data.length > 0) setProjects(data);
-            setLoading(false);
-        });
+        const fetchGitHubData = async () => {
+            try {
+                const projectsData = await Promise.all(
+                    baseProjects.map(async (p) => {
+                        const proj = { ...p, createdAt: Timestamp.now() } as Project;
+                        if (!proj.isConfidential && proj.repo) {
+                            try {
+                                const res = await fetch(`https://api.github.com/repos/ommaurya2580-beep/${proj.repo}`);
+                                if (res.ok) {
+                                    const data = await res.json();
+                                    proj.stars = data.stargazers_count;
+                                    proj.forks = data.forks_count;
+                                    proj.githubUrl = data.html_url;
+                                }
+                            } catch (error) {
+                                console.error(`Failed to fetch GitHub data for ${proj.repo}:`, error);
+                            }
+                        }
+                        return proj;
+                    })
+                );
+                setProjects(projectsData);
+            } catch (error) {
+                console.error("Error setting up projects:", error);
+                setProjects(baseProjects.map(p => ({ ...p, createdAt: Timestamp.now() } as Project)));
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchGitHubData();
     }, []);
 
     const filtered = activeCategory === 'All'
@@ -143,8 +173,13 @@ export default function Projects() {
                                                 {project.title.charAt(0)}
                                             </div>
                                         </div>
-                                        {/* Category badge */}
-                                        <div className="absolute top-4 right-4">
+                                        {/* Badges container */}
+                                        <div className="absolute top-4 right-4 flex gap-2">
+                                            {project.badge && (
+                                                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-white/10 text-white backdrop-blur-md border border-white/20 shadow-lg flex items-center gap-1">
+                                                    🔥 {project.badge}
+                                                </span>
+                                            )}
                                             <span
                                                 className="px-3 py-1 rounded-full text-xs font-mono font-bold"
                                                 style={{
@@ -184,22 +219,33 @@ export default function Projects() {
                                             )}
                                         </div>
 
-                                        {/* Links */}
-                                        <div className="flex gap-3">
-                                            {project.githubUrl && (
-                                                <a
-                                                    href={project.githubUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    className="text-xs text-slate-400 hover:text-[#00f5ff] transition-colors flex items-center gap-1"
-                                                >
-                                                    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                                        {/* Links & Stats */}
+                                        <div className="flex flex-wrap items-center gap-3">
+                                            {project.isConfidential ? (
+                                                <span className="text-xs text-rose-400 flex items-center gap-1 font-mono uppercase font-bold border border-rose-400/20 bg-rose-400/10 px-2 py-1 rounded-md">
+                                                    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2}>
+                                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                                        <path d="M7 11V7a5 5 0 0110 0v4" />
                                                     </svg>
-                                                    GitHub
-                                                </a>
+                                                    Confidential
+                                                </span>
+                                            ) : (
+                                                project.githubUrl && (
+                                                    <a
+                                                        href={project.githubUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="text-xs text-slate-400 hover:text-[#00f5ff] transition-colors flex items-center gap-1"
+                                                    >
+                                                        <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+                                                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                                                        </svg>
+                                                        GitHub
+                                                    </a>
+                                                )
                                             )}
+
                                             {project.liveUrl && (
                                                 <a
                                                     href={project.liveUrl}
@@ -214,7 +260,24 @@ export default function Projects() {
                                                     Live Demo
                                                 </a>
                                             )}
-                                            <span className="ml-auto text-xs text-slate-500 group-hover:text-[#00f5ff] transition-colors">
+
+                                            {/* Stars & Forks */}
+                                            {!project.isConfidential && (project.stars !== undefined || project.forks !== undefined) && (
+                                                <div className="flex items-center gap-3 ml-auto text-xs font-mono text-slate-400">
+                                                    {project.stars !== undefined && project.stars > 0 && (
+                                                        <span className="flex items-center gap-1 hover:text-[#00f5ff] transition-colors" title="Stars">
+                                                            ⭐ {project.stars}
+                                                        </span>
+                                                    )}
+                                                    {project.forks !== undefined && project.forks > 0 && (
+                                                        <span className="flex items-center gap-1 hover:text-[#00f5ff] transition-colors" title="Forks">
+                                                            🍴 {project.forks}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            <span className={`${project.isConfidential || (!project.stars && !project.forks) ? 'ml-auto ' : ''}text-xs text-slate-500 group-hover:text-[#00f5ff] transition-colors`}>
                                                 View Details →
                                             </span>
                                         </div>
