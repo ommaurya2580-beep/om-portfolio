@@ -45,7 +45,8 @@ const baseProjects: Partial<Project>[] = [
         description: "A real-time weather forecasting web application using external weather APIs. Allows city-based search and displays temperature, humidity, and wind data in a clean responsive UI.",
         techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
         githubUrl: "https://github.com/ommaurya2580-beep",
-        category: "Web App"
+        category: "Web App",
+        liveUrl: "https://weather-app-five-dun-93.vercel.app"
     }
 ];
 
