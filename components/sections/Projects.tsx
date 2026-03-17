@@ -36,7 +36,16 @@ const baseProjects: Partial<Project>[] = [
         description: "Face recognition-based identity verification system.",
         techStack: ["React", "Face API", "JavaScript"],
         category: "AI",
-        isConfidential: true
+        isConfidential: true,
+        liveUrl: "https://lovable.dev/projects/06821d87-694e-4c24-8601-eeb4350b5fc5"
+    },
+    {
+        id: '4',
+        title: "Weather Web App",
+        description: "A real-time weather forecasting web application using external weather APIs. Allows city-based search and displays temperature, humidity, and wind data in a clean responsive UI.",
+        techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
+        githubUrl: "https://github.com/ommaurya2580-beep",
+        category: "Web App"
     }
 ];
 
