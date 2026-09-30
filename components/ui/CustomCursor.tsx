@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 export default function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
@@ -24,23 +23,25 @@ export default function CustomCursor() {
         };
 
         const animate = () => {
-            followerX += (mouseX - followerX) * 0.1;
-            followerY += (mouseY - followerY) * 0.1;
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
             follower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
             requestAnimationFrame(animate);
         };
 
         const onMouseEnterLink = () => {
-            cursor.style.transform += ' scale(2)';
+            cursor.style.transform += ' scale(1.5)';
             follower.style.width = '60px';
             follower.style.height = '60px';
-            follower.style.borderColor = 'rgba(191, 0, 255, 0.8)';
+            follower.style.borderColor = 'var(--purple)';
+            follower.style.backgroundColor = 'rgba(124, 58, 237, 0.05)';
         };
 
         const onMouseLeaveLink = () => {
             follower.style.width = '40px';
             follower.style.height = '40px';
-            follower.style.borderColor = 'rgba(0, 245, 255, 0.5)';
+            follower.style.borderColor = 'var(--blue)';
+            follower.style.backgroundColor = 'transparent';
         };
 
         document.addEventListener('mousemove', onMouseMove);
@@ -62,14 +63,14 @@ export default function CustomCursor() {
             {/* Main cursor dot */}
             <div
                 ref={cursorRef}
-                className="fixed top-0 left-0 w-3 h-3 rounded-full bg-[#00f5ff] z-[9999] pointer-events-none mix-blend-screen hidden md:block"
-                style={{ boxShadow: '0 0 10px #00f5ff, 0 0 20px #00f5ff' }}
+                className="fixed top-0 left-0 w-3 h-3 rounded-full bg-accent-blue z-[9999] pointer-events-none hidden md:block"
+                style={{ boxShadow: '0 4px 10px rgba(37,99,235,0.4)' }}
             />
             {/* Follower ring */}
             <div
                 ref={followerRef}
-                className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[rgba(0,245,255,0.5)] z-[9998] pointer-events-none hidden md:block transition-all duration-300"
-                style={{ boxShadow: '0 0 15px rgba(0, 245, 255, 0.2)' }}
+                className="fixed top-0 left-0 w-10 h-10 rounded-full border-2 border-accent-blue z-[9998] pointer-events-none hidden md:block transition-all duration-300 backdrop-blur-[2px]"
+                style={{ boxShadow: '0 8px 20px rgba(37,99,235,0.2)' }}
             />
         </>
     );

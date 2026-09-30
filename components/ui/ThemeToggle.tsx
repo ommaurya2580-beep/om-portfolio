@@ -3,6 +3,7 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
 
 export default function ThemeToggle() {
     const { theme, setTheme } = useTheme();
@@ -15,10 +16,10 @@ export default function ThemeToggle() {
 
     return (
         <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            className="relative w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center hover:border-[#00f5ff]/50 transition-all duration-300"
+            className="relative w-10 h-10 rounded-full bg-clay-surface shadow-clay-pill flex items-center justify-center text-text-primary transition-all duration-300"
             aria-label="Toggle theme"
         >
             <motion.div
@@ -28,17 +29,9 @@ export default function ThemeToggle() {
                 transition={{ duration: 0.3 }}
             >
                 {isDark ? (
-                    // Sun icon
-                    <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
-                    </svg>
+                    <Moon className="w-5 h-5 text-accent-cyan" />
                 ) : (
-                    // Moon icon
-                    <svg className="w-5 h-5 text-[#00f5ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
+                    <Sun className="w-5 h-5 text-accent-orange" />
                 )}
             </motion.div>
         </motion.button>
