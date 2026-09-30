@@ -122,98 +122,27 @@ export default function Projects() {
 
     const getProjectVisual = (project: Project) => {
         const title = project.title.toLowerCase();
-        
-        if (title.includes('aktu')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#EDE9FE] dark:from-blue-900/40 dark:to-indigo-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="w-28 h-20 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center p-2 z-10 border-b-4 border-gray-200 dark:border-gray-800">
-                        <Layout className="w-8 h-8 text-blue-500 mb-2" />
-                        <div className="w-16 h-2 bg-blue-100 rounded-full" />
-                    </div>
-                    <div className="absolute right-4 bottom-4 w-12 h-12 bg-blue-400 rounded-lg shadow-lg rotate-12 flex items-center justify-center">
-                        <BookOpen className="text-white w-6 h-6" />
-                    </div>
-                </div>
-            );
-        }
-        if (title.includes('spin')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#FCE7F3] to-[#F3E8FF] dark:from-pink-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="w-16 h-32 bg-white dark:bg-[#1a1f2c] rounded-[20px] shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center p-2 z-10 border-4 border-pink-200 dark:border-pink-900/50">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-400 to-purple-500 flex items-center justify-center shadow-inner">
-                            <Star className="text-white w-5 h-5" />
-                        </div>
-                    </div>
-                    <div className="absolute left-6 top-6 w-8 h-8 bg-yellow-400 rounded-full shadow-lg" />
-                    <div className="absolute right-8 bottom-6 w-10 h-10 bg-purple-400 rounded-full shadow-lg" />
-                </div>
-            );
-        }
-        if (title.includes('face')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#F0FDF4] dark:from-blue-900/40 dark:to-green-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="w-24 h-28 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center p-4 z-10">
-                        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3">
-                            <UserCheck className="text-blue-500 w-6 h-6" />
-                        </div>
-                        <div className="w-full h-2 bg-gray-100 rounded-full mb-2" />
-                        <div className="w-2/3 h-2 bg-gray-100 rounded-full" />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="w-32 h-32 border-4 border-blue-400/30 border-dashed rounded-2xl" />
-                    </div>
-                </div>
-            );
-        }
-        if (title.includes('agripulse')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#DCFCE7] to-[#FEF9C3] dark:from-green-900/40 dark:to-yellow-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="w-32 h-20 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
-                         <div className="w-full px-4 flex justify-between items-end h-10">
-                             <div className="w-3 h-6 bg-green-400 rounded-t-sm" />
-                             <div className="w-3 h-10 bg-green-500 rounded-t-sm" />
-                             <div className="w-3 h-4 bg-green-300 rounded-t-sm" />
-                         </div>
-                    </div>
-                    <div className="absolute left-4 bottom-4">
-                        <Leaf className="w-12 h-12 text-green-500 drop-shadow-lg" />
-                    </div>
-                    <div className="absolute right-4 top-4 w-10 h-10 bg-yellow-400 rounded-full shadow-[0_0_20px_rgba(250,204,21,0.6)]" />
-                </div>
-            );
-        }
-        if (title.includes('buynora')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#DBEAFE] to-[#EFF6FF] dark:from-blue-900/40 dark:to-blue-800/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="w-28 h-24 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
-                         <ShoppingCart className="w-10 h-10 text-blue-500" />
-                    </div>
-                    <div className="absolute right-6 top-6 w-10 h-12 bg-pink-400 rounded-lg shadow-lg rotate-12" />
-                    <div className="absolute left-6 bottom-6 w-12 h-8 bg-purple-400 rounded-lg shadow-lg -rotate-12" />
-                </div>
-            );
-        }
-        if (title.includes('parking')) {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-[#E0E7FF] to-[#EDE9FE] dark:from-indigo-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                    <div className="absolute left-8 bottom-8 w-24 h-12 bg-red-400 rounded-xl shadow-lg z-20 flex items-center justify-center">
-                        <Car className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="absolute right-10 top-6 w-12 h-16 bg-blue-500 rounded-lg shadow-lg z-10 flex flex-col items-center">
-                        <div className="text-white font-bold text-xl mt-2">P</div>
-                        <div className="w-1 h-8 bg-gray-400 mt-auto" />
-                    </div>
-                    <div className="w-full h-4 bg-gray-300 absolute bottom-4" />
-                </div>
-            );
-        }
+        let imgSrc = '';
+
+        if (title.includes('aktu')) imgSrc = '/projects/p1.jpg';
+        else if (title.includes('spin')) imgSrc = '/projects/p2.jpg';
+        else if (title.includes('face')) imgSrc = '/projects/p3.jpg';
+        else if (title.includes('agripulse')) imgSrc = '/projects/p4.jpg';
+        else if (title.includes('buynora')) imgSrc = '/projects/p5.jpg';
+        else if (title.includes('parking')) imgSrc = '/projects/p6.jpg';
 
         return (
-             <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#F3E8FF] dark:from-blue-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
-                 <div className="w-20 h-20 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
-                     <Layout className="w-8 h-8 text-blue-500" />
-                 </div>
-             </div>
+            <div className="w-full h-full relative overflow-hidden bg-white/50">
+                {imgSrc ? (
+                    <img 
+                        src={imgSrc} 
+                        alt={`${project.title} project preview`}
+                        className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                    />
+                ) : (
+                    <div className="w-full h-full bg-slate-200 animate-pulse" />
+                )}
+            </div>
         );
     };
 
@@ -368,7 +297,7 @@ export default function Projects() {
                                     onClick={() => setSelectedProject(project)}
                                 >
                                     {/* VISUAL AREA */}
-                                    <div className="w-full h-48 sm:h-56 relative overflow-hidden">
+                                    <div className="w-full h-[210px] relative overflow-hidden">
                                         {getProjectVisual(project)}
                                         
                                         {/* Badges on top of visual */}
