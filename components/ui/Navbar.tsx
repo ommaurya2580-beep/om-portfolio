@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+
 
 const navLinks = [
     { label: 'About', href: '#about' },
@@ -62,7 +62,7 @@ export default function Navbar() {
                     <motion.a
                         href="#"
                         whileHover={{ scale: 1.05 }}
-                        className="text-xl sm:text-2xl font-extrabold font-mono text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-purple"
+                        className="text-xl sm:text-2xl font-extrabold font-mono text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-purple whitespace-nowrap"
                     >
                         {'<0M />'}
                     </motion.a>
@@ -76,7 +76,7 @@ export default function Navbar() {
                                     key={link.label}
                                     href={link.href}
                                     whileHover={{ y: -2 }}
-                                    className={`px-4 py-2 text-xs xl:text-sm font-extrabold rounded-full transition-all duration-300 relative group tracking-wide
+                                    className={`px-4 py-2 text-xs xl:text-sm font-extrabold rounded-full transition-all duration-300 relative group tracking-wide whitespace-nowrap
                                         ${isActive 
                                             ? 'text-accent-blue bg-[#E9EFF7] shadow-clay-pill dark:bg-[#1a1f2c] dark:text-accent-cyan' 
                                             : 'text-text-secondary hover:text-text-primary'
@@ -90,7 +90,6 @@ export default function Navbar() {
 
                     {/* Right side */}
                     <div className="flex items-center gap-4">
-                        <ThemeToggle />
                         
                         <a
                             href="/resume.pdf"

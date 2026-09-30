@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#bfdbfe] dark:bg-blue-900/30 rounded-full blur-[100px] opacity-70 pointer-events-none" />
             
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-                <div className="flex flex-col gap-12 w-full max-w-[1440px]">
+                <div className="flex flex-col gap-4 w-full max-w-[1440px]">
                     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(420px,560px)_minmax(260px,330px)] gap-[30px] items-center">
                         
                         {/* LEFT COLUMN: Info & CTA */}
@@ -232,7 +232,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="w-full mt-4 flex flex-col items-center justify-center"
+                        className="w-full -mt-2 lg:-mt-4 flex flex-col items-center justify-center"
                     >
                         <p className="text-xs font-bold text-text-muted mb-6 uppercase tracking-wider">Trusted by modern technologies</p>
                         <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
@@ -247,18 +247,6 @@ export default function Hero() {
                         </div>
                     </motion.div>
                 </div>
-
-                {/* Scroll Indicator */}
-                <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-                >
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Scroll to explore</span>
-                    <div className="w-6 h-10 border-2 border-text-muted rounded-full flex justify-center p-1">
-                        <div className="w-1 h-2 bg-text-muted rounded-full" />
-                    </div>
-                </motion.div>
             </div>
         </section>
     );
