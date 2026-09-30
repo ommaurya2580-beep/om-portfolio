@@ -52,7 +52,7 @@ export default function Navbar() {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                 className="fixed top-4 left-0 right-0 z-[9980] flex justify-center px-4"
             >
-                <nav className={`transition-all duration-500 rounded-full flex items-center justify-between px-4 sm:px-6 py-2.5 w-full max-w-[1400px]
+                <nav className={`transition-all duration-500 rounded-full flex items-center justify-between px-4 sm:px-6 py-2.5 w-full max-w-[1100px]
                     ${scrolled 
                         ? 'bg-clay-surface/90 backdrop-blur-xl shadow-clay-floating border border-white/50 dark:border-white/5' 
                         : 'bg-clay-surface shadow-clay-floating'
