@@ -2,69 +2,97 @@
 
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Mail, Download, ArrowRight, Code2, Cloud, Shield, Database } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
+import { Download, ArrowRight, Target, Award, Trophy, Code2, Users, FileText, CheckCircle2 } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, GmailIcon } from '@/components/ui/BrandIcons';
+import { ReactIcon, NextJsIcon, JavascriptIcon, FirebaseIcon, PythonIcon, AWSIcon } from '@/components/ui/TechIcons';
 
 const socialLinks = [
-    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <GithubIcon className="w-5 h-5" />, color: '#2563EB' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <LinkedinIcon className="w-5 h-5" />, color: '#06B6D4' },
-    { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', icon: <Code2 className="w-5 h-5" />, color: '#F59E0B' },
+    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <GithubIcon className="w-5 h-5 text-gray-800 dark:text-white" /> },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <LinkedinIcon className="w-5 h-5 text-[#0077b5]" /> },
+    { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', icon: <Code2 className="w-5 h-5 text-[#ffa116]" /> },
+    { label: 'Mail', href: 'mailto:ommaurya2580@gmail.com', icon: <GmailIcon className="w-5 h-5" /> },
+];
+
+const techStack = [
+    { name: 'React', icon: <ReactIcon className="w-6 h-6 text-[#61dafb]" /> },
+    { name: 'Next.js', icon: <NextJsIcon className="w-6 h-6 text-black dark:text-white" /> },
+    { name: 'JavaScript', icon: <JavascriptIcon className="w-6 h-6" /> },
+    { name: 'Firebase', icon: <FirebaseIcon className="w-6 h-6" /> },
+    { name: 'Python', icon: <PythonIcon className="w-6 h-6" /> },
+    { name: 'AWS', icon: <AWSIcon className="w-6 h-6" /> },
+];
+
+const statsCards = [
+    {
+        title: 'Projects',
+        value: '2+',
+        icon: <Target className="w-6 h-6" />,
+        color: 'var(--purple)',
+        bgClass: 'bg-[#f3e8ff] dark:bg-[#6b21a8]',
+        sideIcon: <Code2 className="w-5 h-5 text-accent-blue opacity-50" />
+    },
+    {
+        title: 'Certifications',
+        value: '5+',
+        icon: <Award className="w-6 h-6" />,
+        color: 'var(--orange)',
+        bgClass: 'bg-[#ffedd5] dark:bg-[#c2410c]',
+        sideIcon: <FileText className="w-5 h-5 text-accent-blue opacity-50" />
+    },
+    {
+        title: 'Hackathons',
+        value: '7+',
+        icon: <Trophy className="w-6 h-6" />,
+        color: 'var(--yellow)',
+        bgClass: 'bg-[#fef9c3] dark:bg-[#ca8a04]',
+        sideIcon: <Users className="w-5 h-5 text-accent-blue opacity-50" />
+    }
 ];
 
 export default function Hero() {
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
+        <section className="relative min-h-screen pt-28 pb-12 flex items-center overflow-hidden bg-clay-bg">
+            {/* Dynamic Background Blobs exactly like the image */}
+            <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#fbcfe8] dark:bg-pink-900/30 rounded-full blur-[80px] opacity-70 pointer-events-none" />
+            <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-[#bfdbfe] dark:bg-blue-900/30 rounded-full blur-[100px] opacity-70 pointer-events-none" />
             
-            {/* Claymorphism decorative blobs */}
-            <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-accent-blue clay-blob"></div>
-            <div className="absolute bottom-[20%] right-[10%] w-72 h-72 bg-accent-purple clay-blob"></div>
-            <div className="absolute top-[40%] right-[30%] w-48 h-48 bg-accent-pink clay-blob"></div>
-
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
                     
-                    {/* Left: Content */}
-                    <div className="text-center lg:text-left">
-                        {/* Badge */}
+                    {/* LEFT COLUMN: Info & CTA */}
+                    <div className="lg:col-span-4 flex flex-col justify-center">
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full clay-card mb-8 text-sm font-bold text-text-secondary"
+                            transition={{ duration: 0.8 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-clay-surface rounded-full shadow-clay-input text-xs font-bold text-text-secondary w-fit mb-6"
                         >
-                            <span className="w-3 h-3 rounded-full bg-accent-green" />
+                            <span className="w-2.5 h-2.5 bg-accent-green rounded-full animate-pulse" />
                             Available for opportunities
                         </motion.div>
 
-                        {/* Name */}
                         <motion.h1
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.2 }}
-                            className="text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold mb-4 tracking-tight leading-tight"
+                            transition={{ duration: 0.8, delay: 0.1 }}
+                            className="text-5xl sm:text-6xl xl:text-7xl font-extrabold text-text-primary tracking-tight leading-tight mb-4"
                         >
-                            <span className="text-text-primary">Om </span>
-                            <span className="gradient-text">Maurya</span>
+                            Om <br className="hidden lg:block" />
+                            <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">Maurya</span>
                         </motion.h1>
 
-                        {/* Typing animation */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="text-xl sm:text-2xl font-bold mb-6 h-8 text-text-secondary flex items-center justify-center lg:justify-start gap-2"
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-lg sm:text-xl font-bold mb-6 text-text-secondary flex items-center gap-2"
                         >
-                            <span className="text-accent-blue">{'>'}</span>
+                            <span className="text-accent-blue text-xl">{'>'}</span>
                             <TypeAnimation
                                 sequence={[
-                                    'Full Stack Developer',
-                                    2000,
-                                    'Cyber Security Intern',
-                                    2000,
-                                    'AI & Cloud Certified',
-                                    2000,
-                                    'Problem Solver',
-                                    2000,
+                                    'Full Stack Developer |', 2000,
+                                    'Cyber Security Intern |', 2000,
+                                    'AI & Cloud Explorer |', 2000,
                                 ]}
                                 wrapper="span"
                                 speed={50}
@@ -72,45 +100,43 @@ export default function Hero() {
                             />
                         </motion.div>
 
-                        {/* Description */}
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-text-muted text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-10 font-medium leading-relaxed"
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="text-text-muted text-sm sm:text-base mb-8 font-medium leading-relaxed max-w-md"
                         >
-                            Passionate developer building scalable web applications, exploring AI & Cloud technologies,
-                            and competing in hackathons. Based in Delhi NCR.
+                            Passionate developer building scalable web applications, 
+                            exploring AI & Cloud technologies, and competing in hackathons. 
+                            Based in <span className="font-bold text-accent-blue">Delhi NCR</span>.
                         </motion.p>
 
-                        {/* CTA Buttons */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-10"
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="flex flex-wrap items-center gap-4 mb-10"
                         >
                             <motion.a
                                 href="#projects"
-                                className="px-8 py-4 clay-btn-primary gap-2"
+                                className="px-6 py-3 bg-gradient-to-r from-accent-blue to-accent-purple text-white font-bold rounded-full shadow-clay-btn hover:shadow-clay-floating hover:-translate-y-1 transition-all flex items-center gap-2 text-sm"
                             >
                                 View Projects <ArrowRight className="w-4 h-4" />
                             </motion.a>
                             <motion.a
                                 href="/resume.pdf"
                                 download
-                                className="px-8 py-4 clay-btn-secondary gap-2"
+                                className="px-6 py-3 bg-clay-surface text-accent-blue font-bold rounded-full shadow-clay-input hover:shadow-clay-pill transition-all flex items-center gap-2 text-sm"
                             >
                                 Download Resume <Download className="w-4 h-4" />
                             </motion.a>
                         </motion.div>
 
-                        {/* Social Links */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="flex items-center justify-center lg:justify-start gap-4"
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="flex items-center gap-4 mb-12"
                         >
                             {socialLinks.map((social) => (
                                 <motion.a
@@ -118,69 +144,116 @@ export default function Hero() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-14 h-14 rounded-[1.25rem] clay-card flex items-center justify-center text-text-secondary hover:text-[var(--hover-color)] transition-colors duration-300"
-                                    style={{ '--hover-color': social.color } as React.CSSProperties}
+                                    className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-floating flex items-center justify-center hover:-translate-y-1 transition-all"
                                     aria-label={social.label}
                                 >
                                     {social.icon}
                                 </motion.a>
                             ))}
                         </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                        >
+                            <p className="text-xs font-bold text-text-muted mb-4 uppercase tracking-wider">Trusted by modern technologies</p>
+                            <div className="flex flex-wrap gap-3">
+                                {techStack.map((tech) => (
+                                    <div key={tech.name} className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-floating flex items-center justify-center hover:scale-110 transition-transform cursor-help" title={tech.name}>
+                                        {tech.icon}
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
 
-                    {/* Right: Soft 3D Visual Concept (CSS Clay Composition) */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="hidden lg:flex relative h-[500px] w-full items-center justify-center"
-                    >
-                        {/* Center large soft circle */}
-                        <div className="absolute w-[350px] h-[350px] bg-gradient-active rounded-full shadow-clay-card flex items-center justify-center overflow-hidden">
-                            <div className="w-[80%] h-[80%] rounded-full bg-clay-surface shadow-clay-input flex items-center justify-center relative">
-                                {/* Profile abstract representation / Code block abstract */}
-                                <div className="w-32 h-24 bg-gradient-primary rounded-2xl shadow-clay-floating rotate-12 flex flex-col justify-center px-4 gap-2">
-                                    <div className="w-1/2 h-2 bg-white/30 rounded-full" />
-                                    <div className="w-3/4 h-2 bg-white/30 rounded-full" />
-                                    <div className="w-1/3 h-2 bg-white/30 rounded-full" />
-                                </div>
-                            </div>
-                        </div>
+                    {/* CENTER COLUMN: 3D Illustration Area */}
+                    <div className="lg:col-span-5 h-[600px] relative hidden lg:flex items-center justify-center">
+                        {/* Placeholder for the user's 3D image. Replace src with actual image in public folder */}
+                        <motion.img 
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, delay: 0.3 }}
+                            src="/3d-avatar.png" 
+                            alt="3D Avatar" 
+                            className="max-w-[120%] max-h-[120%] object-contain z-10"
+                            style={{ filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.15))' }}
+                            onError={(e) => {
+                                // Fallback if image doesn't exist yet
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement!.innerHTML = `
+                                    <div class="text-center p-8 bg-clay-surface rounded-3xl shadow-clay-card">
+                                        <p class="text-text-muted font-bold mb-2">3D Avatar Placeholder</p>
+                                        <p class="text-xs text-text-secondary">Place your image as <code>/public/3d-avatar.png</code></p>
+                                    </div>
+                                `;
+                            }}
+                        />
 
-                        {/* Floating elements around */}
+                        {/* Floating ambient icons mimicking the reference */}
+                        <motion.div 
+                            animate={{ y: [-15, 15, -15], rotate: [-5, 5, -5] }} 
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute top-[20%] left-0 w-20 h-16 bg-[#a855f7] rounded-2xl shadow-clay-floating flex items-center justify-center text-white z-0 -rotate-12"
+                        >
+                            <span className="text-xl font-black font-mono">{'</>'}</span>
+                        </motion.div>
+
+                        <motion.div 
+                            animate={{ y: [15, -15, 15], rotate: [5, -5, 5] }} 
+                            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            className="absolute top-[15%] right-0 w-16 h-16 bg-[#3b82f6] rounded-2xl shadow-clay-floating flex items-center justify-center text-white z-0 rotate-12"
+                        >
+                            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 19c2.5 0 4.5-2 4.5-4.5 0-2.3-1.8-4.2-4.1-4.5C17.4 6 13.9 3 10 3 5.6 3 2 6.6 2 11c0 4.4 3.6 8 8 8h7.5zM10 5c3 0 5.6 2.2 6.3 5.1l.3 1.2 1.3.1c1.4.1 2.6 1.3 2.6 2.8 0 1.5-1.2 2.7-2.7 2.7H10c-3.1 0-5.7-2.5-5.7-5.7 0-3.1 2.5-5.7 5.7-5.7z"/></svg>
+                        </motion.div>
+
                         <motion.div 
                             animate={{ y: [-10, 10, -10] }} 
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-10 right-10 w-20 h-20 bg-clay-surface rounded-2xl shadow-clay-floating flex items-center justify-center text-accent-blue"
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                            className="absolute bottom-[30%] right-[-5%] w-16 h-16 bg-[#10b981] rounded-2xl shadow-clay-floating flex items-center justify-center text-white z-0 -rotate-6"
                         >
-                            <Cloud className="w-8 h-8" />
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                         </motion.div>
+                    </div>
 
-                        <motion.div 
-                            animate={{ y: [10, -10, 10] }} 
-                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute bottom-20 right-4 w-24 h-24 bg-clay-surface rounded-[2rem] shadow-clay-floating flex items-center justify-center text-accent-purple"
-                        >
-                            <Code2 className="w-10 h-10" />
-                        </motion.div>
+                    {/* RIGHT COLUMN: Stacked Cards */}
+                    <div className="lg:col-span-3 flex flex-col gap-6 justify-center">
+                        {statsCards.map((stat, i) => (
+                            <motion.div
+                                key={stat.title}
+                                initial={{ opacity: 0, x: 50 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+                                className="bg-white dark:bg-[#1a1f2c] rounded-[32px] p-5 shadow-clay-floating flex items-center gap-4 hover:scale-[1.02] transition-transform cursor-default relative overflow-hidden"
+                            >
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-clay-pill flex-shrink-0 ${stat.bgClass}`} style={{ color: stat.color }}>
+                                    {stat.icon}
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-2xl font-extrabold text-text-primary leading-tight">{stat.value}</h3>
+                                    <p className="text-xs font-bold text-text-secondary">{stat.title}</p>
+                                </div>
+                                <div className="pr-2">
+                                    {stat.sideIcon}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
 
-                        <motion.div 
-                            animate={{ y: [-15, 15, -15] }} 
-                            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                            className="absolute top-32 left-4 w-16 h-16 bg-clay-surface rounded-xl shadow-clay-floating flex items-center justify-center text-accent-green"
-                        >
-                            <Shield className="w-7 h-7" />
-                        </motion.div>
-
-                        <motion.div 
-                            animate={{ y: [15, -15, 15] }} 
-                            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                            className="absolute bottom-10 left-16 w-20 h-20 bg-clay-surface rounded-[1.5rem] shadow-clay-floating flex items-center justify-center text-accent-pink"
-                        >
-                            <Database className="w-8 h-8" />
-                        </motion.div>
-                    </motion.div>
                 </div>
+
+                {/* Scroll Indicator */}
+                <motion.div 
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Scroll to explore</span>
+                    <div className="w-6 h-10 border-2 border-text-muted rounded-full flex justify-center p-1">
+                        <div className="w-1 h-2 bg-text-muted rounded-full" />
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

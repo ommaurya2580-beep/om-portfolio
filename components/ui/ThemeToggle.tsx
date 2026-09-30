@@ -15,25 +15,31 @@ export default function ThemeToggle() {
     const isDark = theme === 'dark';
 
     return (
-        <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        <button
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            className="relative w-10 h-10 rounded-full bg-clay-surface shadow-clay-pill flex items-center justify-center text-text-primary transition-all duration-300"
+            className="relative flex items-center justify-between w-[72px] h-10 p-1 rounded-full bg-[#f1f5f9] dark:bg-[#1a1f2c] shadow-clay-input overflow-hidden transition-colors"
             aria-label="Toggle theme"
         >
+            {/* The sliding toggle thumb */}
             <motion.div
-                key={isDark ? 'moon' : 'sun'}
-                initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-            >
-                {isDark ? (
-                    <Moon className="w-5 h-5 text-accent-cyan" />
-                ) : (
-                    <Sun className="w-5 h-5 text-accent-orange" />
-                )}
-            </motion.div>
-        </motion.button>
+                initial={false}
+                animate={{
+                    x: isDark ? 32 : 0,
+                    backgroundColor: isDark ? '#1a1f2c' : '#FBBF24'
+                }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                className="absolute left-1 w-8 h-8 rounded-full shadow-md z-0"
+                style={{
+                    boxShadow: isDark 
+                        ? 'inset 2px 2px 4px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.5)'
+                        : 'inset 2px 2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(245,158,11,0.5)'
+                }}
+            />
+            
+            <div className="relative z-10 w-full flex justify-between px-2 items-center pointer-events-none">
+                <Sun className={`w-4 h-4 transition-colors duration-300 ${isDark ? 'text-text-muted' : 'text-white'}`} />
+                <Moon className={`w-4 h-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-text-muted'}`} />
+            </div>
+        </button>
     );
 }
