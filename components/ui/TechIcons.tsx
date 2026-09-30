@@ -1,87 +1,12 @@
 import React from 'react';
 
-// Tech Icons as simple SVGs to avoid heavy dependencies
-export const ReactIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="-11.5 -10.23174 23 20.46348" fill="currentColor" className={className}>
-        <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
-        <g stroke="#61dafb" strokeWidth="1" fill="none">
-            <ellipse rx="11" ry="4.2"/>
-            <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
-            <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
-        </g>
-    </svg>
-);
-
-export const NextJsIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 180 180" fill="currentColor" className={className}>
-        <mask id="mask0_408_134" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
-            <circle cx="90" cy="90" r="90" fill="black" />
-        </mask>
-        <g mask="url(#mask0_408_134)">
-            <circle cx="90" cy="90" r="90" fill="black" />
-            <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#paint0_linear_408_134)" />
-            <path d="M115.012 54H127.125V125.97H115.012V54Z" fill="url(#paint1_linear_408_134)" />
-        </g>
-        <defs>
-            <linearGradient id="paint0_linear_408_134" x1="109" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
-                <stop stopColor="white" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="paint1_linear_408_134" x1="121.068" y1="54" x2="120.739" y2="106.875" gradientUnits="userSpaceOnUse">
-                <stop stopColor="white" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-            </linearGradient>
-        </defs>
-    </svg>
-);
-
-export const JavascriptIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path d="M0 0h24v24H0V0z" fill="none" />
-        <path fill="#F7DF1E" d="M1.5 1.5h21v21h-21z" />
-        <path d="M11.69 17.58c-.3-.89-.92-1.2-1.95-1.2-1.12 0-1.78.5-1.78 1.4 0 .97.74 1.3 2.05 1.83l.53.22c1.7.72 2.67 1.63 2.67 3.2 0 2.1-1.63 3.32-3.77 3.32-2.3 0-3.66-1.32-4-3.1h2.52c.2.82.78 1.25 1.5 1.25.9 0 1.54-.43 1.54-1.26 0-.82-.57-1.16-1.8-1.7l-.53-.22c-1.84-.77-2.9-1.68-2.9-3.26 0-2 1.66-3.15 3.6-3.15 2.1 0 3.33 1 3.75 2.68h-2.43zm9.64 5.37c-.15 2.17-1.7 3.4-4.04 3.4-2.48 0-4-1.57-4-4.13V11.5h2.64v10.63c0 1.34.62 1.95 1.53 1.95 1.05 0 1.68-.66 1.68-2.12V11.5h2.64v11.45z" />
-    </svg>
-);
-
-export const FirebaseIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-        <path d="M3.708 19.167l6.096-18.775a.8.8 0 011.532.023l1.82 5.09-9.448 13.662z" fill="#FFC24A"/>
-        <path d="M12.923 5.922l1.966-2.036a.8.8 0 011.36.425l2.42 14.856-5.746-13.245z" fill="#FFA000"/>
-        <path d="M12.637 19.333l-8.929-6.398a.8.8 0 01.127-1.428l15.228-3.085-6.426 10.91z" fill="#F6820C"/>
-    </svg>
-);
-
-export const PythonIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#3776AB" d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.08.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.14-.18.22-.15.27-.09.32-.03.35.03.36.09.31.15.28.18.21.23.15.27.1.32.05.35-.01.35-.08.31-.15.28-.21.22-.27.15-.31.08-.35v-.36l-.08-.34-.15-.31-.22-.27-.28-.21-.31-.15-.35-.09-.35-.02-.32.03-.27.08z"/>
-        <path fill="#FFD43B" d="M9.75 23.82l-.9-.2-.73-.26-.59-.3-.45-.32-.34-.34-.25-.34-.16-.33-.1-.3-.04-.26-.02-.2.01-.13V15.5l.05-.63.13-.55.21-.46.26-.38.3-.31.33-.25.35-.19.35-.14.33-.1.3-.07.26-.04.21-.02h5.26l.69-.05.59-.14.5-.22.41-.27.33-.32.27-.35.2-.36.15-.37.1-.35.07-.32.04-.27.02-.21v-3.06h3.39l.21.03.28.07.32.12.35.18.36.26.36.36.35.46.32.59.28.73.21.88.14 1.05.05 1.23-.06 1.22-.16 1.04-.24.87-.32.71-.36.57-.4.44-.42.33-.42.24-.4.16-.36.1-.32.05-.24.01h-.16l-.06-.01H10.5v.83h5.32l.01 2.75.02.37-.05.34-.11.31-.17.28-.25.26-.31.23-.38.2-.44.18-.51.15-.58.12-.64.1-.71.08-.77.04-.84.02-1.27-.05zm6.3-1.98l.23-.14.18-.22.15-.27.09-.32.03-.35-.03-.36-.09-.31-.15-.28-.18-.21-.23-.15-.27-.1-.32-.05-.35.01-.35.08-.31.15-.28.21-.22.27-.15.31-.08.35v.36l.08.34.15.31.22.27.28.21.31.15.35.09.35.02.32-.03.27-.08z"/>
-    </svg>
-);
-
-export const AWSIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#232F3E" d="M14.56 16.71c-1.39 0-2.48-.84-2.48-2.18 0-1.19.92-2.1 2.45-2.1h1.61v-.47c0-.75-.41-1.35-1.42-1.35-.77 0-1.5.34-1.92.57l-.34-.99c.53-.33 1.5-.56 2.52-.56 1.83 0 2.65 1 2.65 2.64v3.13c0 .54.1.99.27 1.25v.06h-1.38c-.14-.23-.23-.58-.27-.95h-.03c-.39.63-1.09.89-1.66.89zm1.99-2.91v-.53h-1.42c-.77 0-1.19.34-1.19.92 0 .54.42.92 1.15.92.77 0 1.46-.57 1.46-1.31zm6.05-4.14l-1.11 3.5h1.5l.57 1.95c.12.38.19.73.23 1.12h.04c.04-.38.15-.73.27-1.12l.61-1.95h1.5l.54 1.95c.08.34.15.73.19 1.12h.04c.04-.38.12-.73.19-1.12l.58-1.95h1.46l-1.15 3.5c-.46 1.34-1.04 2.07-1.88 2.07-.61 0-1.08-.46-1.35-1.07-.27.61-.77 1.07-1.35 1.07-.81 0-1.39-.73-1.88-2.07zm-20.08-.65c.04 1.3.81 2.07 1.88 2.07.85 0 1.38-.42 1.73-.84l.73.96c-.58.65-1.46 1.11-2.65 1.11-2.04 0-3.35-1.38-3.35-3.26 0-1.99 1.31-3.3 3.12-3.3 1.77 0 2.77 1.19 2.77 2.84 0 .15-.04.31-.04.38h-4.19zm2.84-.88c-.04-.88-.46-1.57-1.35-1.57-.85 0-1.35.65-1.42 1.57H5.36z"/>
-        <path fill="#FF9900" d="M15.11 20.03c-3.43 1.65-7.43 2.15-11.24 1.38-1.23-.23-2.42-.61-3.54-1.11l-.12-.54c2.81 1.84 7.04 2.45 10.86 1.46 1.39-.34 2.73-.92 3.97-1.65l.07.46zm.42-1.34c-.15.08-.69.08-.77-.04-.12-.12.08-.58.19-.69l.92-1.04c.12-.08.19-.08.27.04.12.19.46.96.46 1.11.04.12-.15.15-.27.12l-.77-.38c.23.27.42.61 0 .88z"/>
-    </svg>
-);
-
-export const NodeJsIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#339933" d="M11.87 23.95v-8.23l-7.14 4.12-4.73-2.73v-9.61L11.87 0l11.87 6.85v9.61l-4.73 2.73-7.14-4.12v8.23l-3.23.65zm0-23.3L1.6 7.42v8.46l10.27 5.92v-7.11l7.14-4.12v-5.46l-7.14-4.12-8.31 4.79v1.3l8.31-4.79 5.89 3.4v4.12l-5.89 3.4-5.89-3.4v4.1l5.89 3.4 8.67-5V8.58L11.87.65z"/>
-    </svg>
-);
-export const DockerIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#2496ED" d="M13.983 11.233h2.119v2.183h-2.119v-2.183zm-2.825 0h2.118v2.183h-2.118v-2.183zm0-2.846h2.118v2.182h-2.118V8.387zm-2.812 2.846h2.118v2.183H8.346v-2.183zm0-2.846h2.118v2.182H8.346V8.387zm0-2.844h2.118v2.182H8.346V5.543zm-2.825 5.69h2.118v2.183H5.521v-2.183zm0-2.846h2.118v2.182H5.521V8.387zm0-2.844h2.118v2.182H5.521V5.543zm-2.825 5.69h2.118v2.183H2.696v-2.183zM21.92 11.026c-.328-.501-1.024-.658-1.597-.375-.24-.469-.99-.613-1.467-.345-.262-.395-.883-.497-1.3-.235V9.434l-5.694-1.309v3.1h10.366v5.823h-9.986l-6.84 3.755H2.696V11.233H0v12.766h24V11.026z"/>
-    </svg>
-);
-export const MongoDBIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#47A248" d="M11.968 0C10.748.066 9.584 1.258 9.584 2.85c0 1.22-.056 4.39-.08 5.766-.027 1.636 1.134 3.655 2.502 3.655 1.343 0 2.457-1.954 2.457-3.655 0-1.616-.062-4.148-.062-5.766C14.396 1.206 13.167 0 11.968 0zm-1.8 13.315c-3.1 1.054-4.8 3.513-4.8 6.012 0 3.013 3.053 4.673 6.643 4.673 3.585 0 6.575-1.65 6.575-4.673 0-2.52-1.745-4.996-4.908-6.027-.37.954-.83 1.838-1.574 1.838-.727 0-1.22-.924-1.598-1.823z"/>
-    </svg>
-);
-export const TailwindIcon = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path fill="#06B6D4" d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/>
-    </svg>
-);
+export const ReactIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" className={className} alt="React" />;
+export const NextJsIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" className={className} alt="Next.js" />;
+export const JavascriptIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" className={className} alt="JavaScript" />;
+export const FirebaseIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" className={className} alt="Firebase" />;
+export const PythonIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" className={className} alt="Python" />;
+export const AWSIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" className={className} alt="AWS" />;
+export const NodeJsIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" className={className} alt="Node.js" />;
+export const DockerIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" className={className} alt="Docker" />;
+export const MongoDBIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" className={className} alt="MongoDB" />;
+export const TailwindIcon = ({ className }: { className?: string }) => <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" className={className} alt="Tailwind CSS" />;

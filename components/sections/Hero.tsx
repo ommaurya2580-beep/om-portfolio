@@ -106,10 +106,9 @@ export default function Hero() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.1 }}
-                                className="text-5xl sm:text-6xl xl:text-7xl font-extrabold text-text-primary tracking-tight leading-tight mb-4"
+                                className="text-5xl sm:text-6xl xl:text-7xl font-extrabold text-text-primary tracking-tight leading-tight mb-4 whitespace-nowrap"
                             >
-                                Om <br className="hidden lg:block" />
-                                <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">Maurya</span>
+                                Om <span className="bg-gradient-to-r from-accent-blue to-accent-purple bg-clip-text text-transparent">Maurya</span>
                             </motion.h1>
 
                             <motion.div
@@ -191,10 +190,14 @@ export default function Hero() {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 1, delay: 0.3 }}
-                                src="/hero-avatar.png" 
+                                src="/hero-avatar-new.jpg" 
                                 alt="Developer Avatar" 
-                                className="w-full max-w-[560px] h-auto object-contain"
-                                style={{ filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.15))' }}
+                                className="w-full max-w-[560px] h-auto object-contain dark:mix-blend-lighten mix-blend-darken"
+                                style={{ 
+                                    maskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
+                                    WebkitMaskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
+                                    filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.1))' 
+                                }}
                             />
                         </div>
 
@@ -229,16 +232,16 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="w-full mt-4"
+                        className="w-full mt-4 flex flex-col items-center justify-center"
                     >
-                        <p className="text-xs font-bold text-text-muted mb-4 uppercase tracking-wider">Trusted by modern technologies</p>
-                        <div className="flex flex-wrap gap-4">
+                        <p className="text-xs font-bold text-text-muted mb-6 uppercase tracking-wider">Trusted by modern technologies</p>
+                        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                             {techStack.map((tech) => (
                                 <div key={tech.name} className="flex flex-col items-center gap-2 group">
-                                    <div className="w-14 h-14 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-card border border-white/50 dark:border-white/5 flex items-center justify-center group-hover:-translate-y-1 transition-all cursor-default">
-                                        {tech.icon}
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-card border border-white/50 dark:border-white/5 flex items-center justify-center group-hover:-translate-y-1 hover:shadow-clay-floating transition-all cursor-default">
+                                        <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">{tech.icon}</div>
                                     </div>
-                                    <span className="text-[10px] font-bold text-text-muted">{tech.name}</span>
+                                    <span className="text-[10px] sm:text-xs font-bold text-text-muted">{tech.name}</span>
                                 </div>
                             ))}
                         </div>
