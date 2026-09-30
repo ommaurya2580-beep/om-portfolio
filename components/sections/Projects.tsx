@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { Timestamp } from 'firebase/firestore';
 import { getProjects, type Project } from '@/lib/firestore';
 import ProjectModal from '@/components/ui/ProjectModal';
+import { ProjectCardSkeleton } from '@/components/ui/LoadingSkeleton';
 import { ExternalLink, Lock, Layout, Star, GitFork, ArrowRight, Smartphone, Brain, Globe, BookOpen, UserCheck, Leaf, ShoppingCart, Car, Rocket } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandIcons';
 
