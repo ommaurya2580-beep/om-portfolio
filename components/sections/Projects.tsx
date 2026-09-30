@@ -218,12 +218,12 @@ export default function Projects() {
     };
 
     return (
-        <section id="projects" className="relative py-24 sm:py-32 bg-[#EEF4FB] dark:bg-[#0f172a] overflow-hidden">
+        <section id="projects" className="relative pt-[110px] pb-16 bg-[#EEF4FB] dark:bg-[#0f172a] overflow-hidden">
             {/* Ambient Background Gradients */}
             <div className="absolute inset-0 pointer-events-none z-0">
-                <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[100px]" />
-                <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[20%] left-[40%] w-[600px] h-[600px] bg-teal-400/10 rounded-full blur-[120px]" />
+                <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[100px]" />
+                <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-purple-400/15 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[20%] left-[30%] w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Floating Decorations (z-index 0) */}
@@ -233,65 +233,115 @@ export default function Projects() {
 
             <div className="max-w-[1300px] mx-auto px-6 sm:px-8 lg:px-10 relative" style={{ zIndex: 2 }}>
                 
-                {/* SECTION HEADER */}
-                <div className="flex flex-col items-center text-center mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/80 dark:bg-[#1a1f2c]/80 rounded-full shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] dark:shadow-none text-xs font-bold text-text-secondary w-fit mb-6"
-                    >
-                        🚀 My Work
-                    </motion.div>
+                {/* SECTION HEADER AREA */}
+                <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between mb-12 relative">
+                    
+                    {/* LEFT COLUMN: Text & Filters */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1 lg:max-w-xl z-10 lg:mt-6">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F8FAFC]/80 dark:bg-[#1a1f2c]/80 rounded-full shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] dark:shadow-none text-[11px] font-bold text-text-secondary w-fit mb-4"
+                        >
+                            🚀 My Work
+                        </motion.div>
 
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl sm:text-5xl font-extrabold text-text-primary mb-6"
-                    >
-                        Featured <span className="bg-gradient-to-r from-[#06B6D4] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">Projects</span>
-                    </motion.h2>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#0f172a] dark:text-white leading-[1.1] mb-3 tracking-tight"
+                        >
+                            Featured <span className="bg-gradient-to-r from-[#0EA5E9] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">Projects</span>
+                        </motion.h2>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-text-muted text-base max-w-xl font-medium"
-                    >
-                        A collection of my best work, built with modern technologies and a passion for solving real-world problems.
-                    </motion.p>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-medium mb-6 max-w-md"
+                        >
+                            A collection of my best work, built with modern technologies and a passion for solving real-world problems.
+                        </motion.p>
+
+                        {/* FILTERS */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-8 lg:mb-0"
+                        >
+                            {categories.map((cat) => {
+                                const Icon = cat.icon;
+                                const isActive = activeCategory === cat.name;
+                                return (
+                                    <button
+                                        key={cat.name}
+                                        onClick={() => setActiveCategory(cat.name)}
+                                        className={`px-5 py-2.5 rounded-full font-bold text-xs flex items-center gap-2 transition-all duration-300 ${
+                                            isActive
+                                                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
+                                                : 'bg-[#EEF4FB] dark:bg-[#1a1f2c] text-slate-500 hover:text-slate-800 shadow-[4px_4px_8px_rgba(148,163,184,0.25),-4px_-4px_8px_rgba(255,255,255,0.85)] dark:shadow-none'
+                                        }`}
+                                    >
+                                        <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                                        {cat.name}
+                                    </button>
+                                );
+                            })}
+                        </motion.div>
+                    </div>
+
+                    {/* CENTER & RIGHT COLUMN: Avatar & Stats */}
+                    <div className="hidden lg:flex items-start justify-between flex-1 z-10 relative h-[280px]">
+                        {/* 3D AVATAR */}
+                        <div className="absolute left-[20%] -top-12 z-0 pointer-events-none">
+                            <motion.img 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                src="/hero-avatar-new.jpg" 
+                                alt="Developer" 
+                                className="w-[340px] object-contain dark:mix-blend-lighten mix-blend-darken"
+                                style={{ 
+                                    maskImage: 'radial-gradient(circle at center, black 60%, transparent 100%)',
+                                    WebkitMaskImage: 'radial-gradient(circle at center, black 60%, transparent 100%)',
+                                }}
+                            />
+                        </div>
+
+                        {/* STATS */}
+                        <div className="flex flex-col gap-4 ml-auto w-[220px] z-20 pt-2">
+                            {[
+                                { title: 'Projects', value: '2+', icon: <Layout className="w-5 h-5 text-[#f59e0b]" />, bgClass: 'bg-[#fef3c7]' },
+                                { title: 'Certifications', value: '5+', icon: <BookOpen className="w-5 h-5 text-[#ef4444]" />, bgClass: 'bg-[#fee2e2]' },
+                                { title: 'Hackathons', value: '7+', icon: <Star className="w-5 h-5 text-[#3b82f6]" />, bgClass: 'bg-[#dbeafe]' },
+                            ].map((stat, i) => (
+                                <motion.div
+                                    key={stat.title}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 + i * 0.1 }}
+                                    className="bg-[rgba(255,255,255,0.6)] dark:bg-[rgba(30,36,52,0.6)] backdrop-blur-md rounded-2xl p-4 shadow-[6px_8px_16px_rgba(148,163,184,0.15),-4px_-4px_10px_rgba(255,255,255,0.7)] flex items-center gap-4 border border-white/40"
+                                >
+                                    <div className={`w-12 h-12 rounded-[14px] flex items-center justify-center flex-shrink-0 shadow-sm ${stat.bgClass}`}>
+                                        {stat.icon}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-extrabold text-slate-800 dark:text-white leading-tight">{stat.value}</h3>
+                                        <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{stat.title}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-
-                {/* FILTERS */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
-                >
-                    {categories.map((cat) => {
-                        const Icon = cat.icon;
-                        const isActive = activeCategory === cat.name;
-                        return (
-                            <button
-                                key={cat.name}
-                                onClick={() => setActiveCategory(cat.name)}
-                                className={`px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 transition-all duration-300 ${
-                                    isActive
-                                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
-                                        : 'bg-[#EEF4FB] dark:bg-[#1a1f2c] text-text-secondary hover:text-text-primary shadow-[6px_6px_12px_rgba(148,163,184,0.25),-5px_-5px_10px_rgba(255,255,255,0.85)] dark:shadow-none'
-                                }`}
-                            >
-                                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-text-muted'}`} />
-                                {cat.name}
-                            </button>
-                        );
-                    })}
-                </motion.div>
 
                 {/* GRID */}
                 <motion.div
