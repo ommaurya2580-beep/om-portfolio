@@ -120,47 +120,33 @@ export default function Projects() {
         ? projects
         : projects.filter((p) => p.category === activeCategory);
 
-    const getProjectVisual = (project: Project) => {
-        const title = project.title.toLowerCase();
-        let imgSrc = '';
-
-        if (title.includes('aktu')) imgSrc = '/projects/p1.jpg';
-        else if (title.includes('spin')) imgSrc = '/projects/p2.jpg';
-        else if (title.includes('face')) imgSrc = '/projects/p3.jpg';
-        else if (title.includes('agripulse')) imgSrc = '/projects/p4.jpg';
-        else if (title.includes('buynora')) imgSrc = '/projects/p5.jpg';
-        else if (title.includes('parking')) imgSrc = '/projects/p6.jpg';
-
-        return (
-            <div className="w-full h-full relative overflow-hidden bg-white/50">
-                {imgSrc ? (
-                    <img 
-                        src={imgSrc} 
-                        alt={`${project.title} project preview`}
-                        className="w-full h-full object-cover object-top transform group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-                    />
-                ) : (
-                    <div className="w-full h-full bg-slate-200 animate-pulse" />
-                )}
-            </div>
-        );
+    const getProjectImage = (title: string) => {
+        const t = title.toLowerCase();
+        if (t.includes('aktu')) return '/projects/aktu-full.jpg';
+        if (t.includes('spin')) return '/projects/spin-full.jpg';
+        if (t.includes('face')) return '/projects/face-full.jpg';
+        if (t.includes('agripulse')) return '/projects/agri-full.jpg';
+        if (t.includes('buynora')) return '/projects/buynora-full.jpg';
+        return null; // For Smart Parking, return null to show placeholder
     };
 
     return (
-        <section id="projects" className="relative pt-[160px] pb-16 bg-[#EEF4FB] dark:bg-[#0f172a] overflow-hidden">
+        <section id="projects" className="relative pt-[160px] pb-24 bg-[#eef5ff] dark:bg-[#0f172a] overflow-hidden">
             {/* Ambient Background Gradients */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute top-[5%] left-[5%] w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[100px]" />
                 <div className="absolute top-[10%] right-[10%] w-[400px] h-[400px] bg-purple-400/15 rounded-full blur-[100px]" />
                 <div className="absolute bottom-[20%] left-[30%] w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[120px]" />
+                <div className="absolute top-[40%] right-[20%] w-[350px] h-[350px] bg-pink-400/15 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-yellow-400/10 rounded-full blur-[100px]" />
             </div>
 
             {/* Floating Decorations (z-index 0) */}
-            <div className="absolute top-60 right-20 w-16 h-16 bg-purple-300 dark:bg-purple-800 rounded-2xl rotate-12 blur-[1px] opacity-60 animate-bounce-slow" style={{ zIndex: 0 }} />
-            <div className="absolute bottom-40 left-10 w-20 h-20 bg-blue-300 dark:bg-blue-800 rounded-full blur-[2px] opacity-50 animate-pulse-slow" style={{ zIndex: 0 }} />
-            <div className="absolute top-1/2 right-10 w-12 h-12 bg-pink-300 dark:bg-pink-800 rounded-lg -rotate-12 blur-[1px] opacity-40 animate-float" style={{ zIndex: 0 }} />
+            <div className="absolute top-60 right-20 w-24 h-24 bg-[rgba(255,255,255,0.6)] dark:bg-purple-800 rounded-3xl rotate-12 backdrop-blur-md shadow-[8px_8px_16px_rgba(148,163,184,0.1),-8px_-8px_16px_rgba(255,255,255,0.8)] border border-white/50 animate-bounce-slow" style={{ zIndex: 0 }} />
+            <div className="absolute bottom-40 left-10 w-20 h-20 bg-[rgba(255,255,255,0.6)] dark:bg-blue-800 rounded-full backdrop-blur-md shadow-[8px_8px_16px_rgba(148,163,184,0.1),-8px_-8px_16px_rgba(255,255,255,0.8)] border border-white/50 animate-pulse-slow" style={{ zIndex: 0 }} />
+            <div className="absolute top-[45%] right-10 w-16 h-16 bg-[rgba(255,255,255,0.6)] dark:bg-pink-800 rounded-2xl -rotate-12 backdrop-blur-md shadow-[8px_8px_16px_rgba(148,163,184,0.1),-8px_-8px_16px_rgba(255,255,255,0.8)] border border-white/50 animate-float" style={{ zIndex: 0 }} />
 
-            <div className="max-w-[1300px] mx-auto px-6 sm:px-8 lg:px-10 relative" style={{ zIndex: 2 }}>
+            <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10 relative" style={{ zIndex: 2 }}>
                 
                 {/* SECTION HEADER AREA */}
                 <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between mb-10 relative gap-8">
@@ -171,7 +157,7 @@ export default function Projects() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F8FAFC]/90 dark:bg-[#1a1f2c]/90 rounded-full shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] dark:shadow-none text-[11px] font-bold text-slate-500 mb-4"
+                            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#f4f7ff] dark:bg-[#1a1f2c] rounded-full shadow-[6px_6px_12px_rgba(140,160,190,0.15),-6px_-6px_12px_rgba(255,255,255,0.9)] dark:shadow-[4px_4px_10px_rgba(0,0,0,0.3),-2px_-2px_6px_rgba(255,255,255,0.05)] border border-white/70 text-[12px] font-bold text-slate-500 mb-5"
                         >
                             🚀 My Work
                         </motion.div>
@@ -181,7 +167,7 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#0f172a] dark:text-white leading-[1.1] mb-3 tracking-tight"
+                            className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#17213c] dark:text-white leading-[1.1] mb-4 tracking-tight"
                         >
                             Featured <span className="bg-gradient-to-r from-[#0EA5E9] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">Projects</span>
                         </motion.h2>
@@ -191,7 +177,7 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-medium mb-6 max-w-md"
+                            className="text-[#64748b] dark:text-slate-400 text-base font-medium mb-8 max-w-lg"
                         >
                             A collection of my best work, built with modern technologies and a passion for solving real-world problems.
                         </motion.p>
@@ -211,13 +197,13 @@ export default function Projects() {
                                     <button
                                         key={cat.name}
                                         onClick={() => setActiveCategory(cat.name)}
-                                        className={`px-5 py-2.5 rounded-full font-bold text-xs flex items-center gap-2 transition-all duration-300 ${
+                                        className={`px-5 py-2.5 rounded-full font-bold text-[13px] flex items-center gap-2 transition-all duration-300 border border-white/75 ${
                                             isActive
-                                                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
-                                                : 'bg-[rgba(255,255,255,0.8)] dark:bg-[#1a1f2c] text-slate-500 hover:text-slate-800 shadow-[4px_4px_8px_rgba(148,163,184,0.25),-4px_-4px_8px_rgba(255,255,255,0.85)] dark:shadow-none border border-white/50'
+                                                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-[6px_8px_16px_rgba(59,130,246,0.3)] scale-[1.02]'
+                                                : 'bg-[#f8fafc] dark:bg-[#1e2434] text-[#64748b] hover:text-[#17213c] shadow-[6px_6px_14px_rgba(140,160,190,0.15),-6px_-6px_14px_rgba(255,255,255,0.9)] dark:shadow-[4px_4px_10px_rgba(0,0,0,0.3),-2px_-2px_6px_rgba(255,255,255,0.05)]'
                                         }`}
                                     >
-                                        <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                                        <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                                         {cat.name}
                                     </button>
                                 );
@@ -226,7 +212,7 @@ export default function Projects() {
                     </div>
 
                     {/* RIGHT COLUMN: Avatar & Stats */}
-                    <div className="hidden lg:flex items-center justify-end flex-1 z-10 gap-4 xl:gap-8">
+                    <div className="hidden lg:flex items-center justify-end flex-1 z-10 gap-6 xl:gap-10">
                         {/* 3D AVATAR */}
                         <motion.img 
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -235,7 +221,7 @@ export default function Projects() {
                             transition={{ duration: 0.8 }}
                             src="/hero-avatar-new.jpg" 
                             alt="Developer" 
-                            className="w-[280px] xl:w-[340px] object-contain mix-blend-darken dark:mix-blend-lighten"
+                            className="w-[300px] xl:w-[360px] object-contain mix-blend-darken dark:mix-blend-lighten"
                             style={{ 
                                 maskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
                                 WebkitMaskImage: 'radial-gradient(circle at center, black 65%, transparent 100%)',
@@ -243,11 +229,11 @@ export default function Projects() {
                         />
 
                         {/* STATS */}
-                        <div className="flex flex-col gap-3 shrink-0">
+                        <div className="flex flex-col gap-4 shrink-0">
                             {[
-                                { title: 'Projects', value: '2+', icon: <Layout className="w-4 h-4 text-[#f59e0b]" />, bgClass: 'bg-[#fef3c7]' },
-                                { title: 'Certifications', value: '5+', icon: <BookOpen className="w-4 h-4 text-[#ef4444]" />, bgClass: 'bg-[#fee2e2]' },
-                                { title: 'Hackathons', value: '7+', icon: <Star className="w-4 h-4 text-[#3b82f6]" />, bgClass: 'bg-[#dbeafe]' },
+                                { title: 'Projects', value: '2+', icon: <Layout className="w-5 h-5 text-[#f59e0b]" />, bgClass: 'bg-[#fef3c7]' },
+                                { title: 'Certifications', value: '5+', icon: <BookOpen className="w-5 h-5 text-[#ef4444]" />, bgClass: 'bg-[#fee2e2]' },
+                                { title: 'Hackathons', value: '7+', icon: <Star className="w-5 h-5 text-[#3b82f6]" />, bgClass: 'bg-[#dbeafe]' },
                             ].map((stat, i) => (
                                 <motion.div
                                     key={stat.title}
@@ -255,14 +241,14 @@ export default function Projects() {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.4 + i * 0.1 }}
-                                    className="bg-[rgba(255,255,255,0.75)] dark:bg-[rgba(30,36,52,0.75)] backdrop-blur-md rounded-[20px] p-3 pr-6 shadow-[6px_8px_16px_rgba(148,163,184,0.15),-4px_-4px_10px_rgba(255,255,255,0.7)] flex items-center gap-3 border border-white/50"
+                                    className="bg-[#f8fafc] dark:bg-[#1e2434] rounded-[24px] p-3.5 pr-8 shadow-[8px_8px_18px_rgba(140,160,190,0.18),-8px_-8px_18px_rgba(255,255,255,0.95)] dark:shadow-[4px_4px_10px_rgba(0,0,0,0.3),-2px_-2px_6px_rgba(255,255,255,0.05)] flex items-center gap-4 border border-white/80"
                                 >
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${stat.bgClass}`}>
+                                    <div className={`w-12 h-12 rounded-[14px] flex items-center justify-center flex-shrink-0 shadow-inner ${stat.bgClass}`}>
                                         {stat.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-extrabold text-slate-800 dark:text-white leading-tight">{stat.value}</h3>
-                                        <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{stat.title}</p>
+                                        <h3 className="text-xl font-extrabold text-[#17213c] dark:text-white leading-tight">{stat.value}</h3>
+                                        <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider mt-0.5">{stat.title}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -274,7 +260,7 @@ export default function Projects() {
                 <motion.div
                     ref={ref}
                     layout
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-7"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7 mt-2"
                 >
                     <AnimatePresence mode="popLayout">
                         {loading ? (
@@ -282,98 +268,134 @@ export default function Projects() {
                                 <ProjectCardSkeleton key={`skeleton-${i}`} />
                             ))
                         ) : (
-                            filtered.map((project, i) => (
-                                <motion.article
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-                                    transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 100 }}
-                                    key={project.id}
-                                    className="group bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(30,36,52,0.85)] backdrop-blur-md rounded-[32px] shadow-[10px_12px_25px_rgba(148,163,184,0.20),-7px_-7px_18px_rgba(255,255,255,0.85)] dark:shadow-[8px_8px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1.5 cursor-pointer"
-                                    style={{ boxShadow: '10px 12px 25px rgba(148,163,184,0.20), -7px -7px 18px rgba(255,255,255,0.85), inset 0 1px 0 rgba(255,255,255,0.75)' }}
-                                    onClick={() => setSelectedProject(project)}
-                                >
-                                    {/* VISUAL AREA */}
-                                    <div className="w-full h-[240px] relative overflow-hidden bg-slate-50">
-                                        {getProjectVisual(project)}
-                                        
-                                        {/* Category Badge on bottom left */}
-                                        <div className="absolute bottom-4 left-4 z-10">
-                                            <div className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/95 dark:bg-[#1a1f2c]/95 text-accent-blue shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] flex items-center gap-1 backdrop-blur-sm border border-white/50">
-                                                <Globe className="w-3 h-3" /> {project.category}
+                            filtered.map((project, i) => {
+                                const imgSrc = getProjectImage(project.title);
+                                return (
+                                    <motion.article
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                                        transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 100 }}
+                                        key={project.id}
+                                        className="group flex flex-col bg-[#fdfdfd] dark:bg-[#1a1f2c] rounded-[28px] border border-white/75 dark:border-white/10 transition-transform duration-300 hover:-translate-y-2 cursor-pointer h-full"
+                                        style={{ 
+                                            boxShadow: '12px 12px 28px rgba(140,160,190,0.20), -10px -10px 24px rgba(255,255,255,0.90), inset 1px 1px 3px rgba(255,255,255,0.80)' 
+                                        }}
+                                        onClick={() => setSelectedProject(project)}
+                                    >
+                                        {/* PADDED IMAGE WRAPPER (Clay Frame) */}
+                                        <div 
+                                            className="m-[14px] p-[10px] bg-[#f4f7ff] dark:bg-[#1e2434] rounded-[26px]"
+                                            style={{
+                                                boxShadow: '8px 8px 18px rgba(140,160,190,0.18), -8px -8px 18px rgba(255,255,255,0.95)'
+                                            }}
+                                        >
+                                            <div className="w-full h-[220px] relative overflow-hidden rounded-[18px]">
+                                                {imgSrc ? (
+                                                    <img 
+                                                        src={imgSrc} 
+                                                        alt={`${project.title} project preview`}
+                                                        className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full bg-slate-200 dark:bg-slate-700 animate-pulse flex items-center justify-center">
+                                                        <div className="text-slate-400 font-medium text-sm">Image Coming Soon</div>
+                                                    </div>
+                                                )}
+                                                
+                                                {/* Category Badge on top left inside the image */}
+                                                <div className="absolute top-[18px] left-[18px] flex gap-2 z-10">
+                                                    {project.badge === 'Featured' && (
+                                                        <div 
+                                                            className="px-3 py-1.5 rounded-full text-[11px] font-bold bg-white/95 dark:bg-[#1a1f2c]/95 text-amber-500 flex items-center gap-1.5 border border-white/60"
+                                                            style={{ boxShadow: '4px 4px 10px rgba(140,160,190,0.25), -2px -2px 6px rgba(255,255,255,0.9)' }}
+                                                        >
+                                                            <Star className="w-3.5 h-3.5 fill-amber-500" /> Featured
+                                                        </div>
+                                                    )}
+                                                    <div 
+                                                        className="px-3 py-1.5 rounded-full text-[11px] font-bold bg-white/95 dark:bg-[#1a1f2c]/95 text-[#3b82f6] flex items-center gap-1.5 border border-white/60"
+                                                        style={{ boxShadow: '4px 4px 10px rgba(140,160,190,0.25), -2px -2px 6px rgba(255,255,255,0.9)' }}
+                                                    >
+                                                        <Globe className="w-3.5 h-3.5" /> {project.category}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/* CONTENT AREA */}
-                                    <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                                        <h3 className="text-[#0f172a] dark:text-white font-bold text-lg mb-2 leading-tight">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-slate-500 text-sm leading-relaxed line-clamp-2 mb-4 font-medium">
-                                            {project.description}
-                                        </p>
+                                        {/* CONTENT AREA */}
+                                        <div className="px-6 pb-6 pt-2 flex flex-col flex-grow">
+                                            <h3 className="text-[#17213c] dark:text-white font-bold text-[22px] mb-2 leading-tight">
+                                                {project.title}
+                                            </h3>
+                                            <p className="text-[#64748b] dark:text-slate-400 text-[15px] leading-[1.6] line-clamp-2 mb-5">
+                                                {project.description}
+                                            </p>
 
-                                        {/* Tech Chips */}
-                                        <div className="flex flex-wrap gap-2 mb-0">
-                                            {project.techStack.slice(0, 3).map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="px-3 py-1 rounded-full text-[11px] font-bold bg-[rgba(255,255,255,0.6)] dark:bg-[#1e2434] text-slate-600 shadow-[inset_1px_1px_3px_rgba(148,163,184,0.2),2px_2px_5px_rgba(148,163,184,0.1)] dark:shadow-none border border-white/40"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                            {project.techStack.length > 3 && (
-                                                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[rgba(255,255,255,0.6)] dark:bg-[#1e2434] text-slate-500 shadow-[inset_1px_1px_3px_rgba(148,163,184,0.2),2px_2px_5px_rgba(148,163,184,0.1)] dark:shadow-none border border-white/40">
-                                                    +{project.techStack.length - 3}
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {/* ACTION ROW */}
-                                        <div className="flex items-center gap-4 mt-auto pt-5">
-                                            {project.isConfidential ? (
-                                                <span className="text-xs text-accent-pink flex items-center gap-1.5 font-bold uppercase px-3 py-1.5 rounded-full bg-[#fce7f3] dark:bg-[#be185d]">
-                                                    <Lock className="w-3.5 h-3.5" />
-                                                    Confidential
-                                                </span>
-                                            ) : (
-                                                project.githubUrl && (
-                                                    <a
-                                                        href={project.githubUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1.5"
+                                            {/* Tech Chips */}
+                                            <div className="flex flex-wrap gap-2.5 mb-6">
+                                                {project.techStack.map((tech) => (
+                                                    <span
+                                                        key={tech}
+                                                        className="px-[12px] py-[7px] rounded-full text-[12px] font-bold bg-[#f1f5fb] dark:bg-[#1e2434] text-[#64748b] border border-white/50"
+                                                        style={{
+                                                            boxShadow: 'inset 2px 2px 5px rgba(140,160,190,0.15), inset -2px -2px 5px rgba(255,255,255,0.8), 2px 2px 4px rgba(140,160,190,0.1)'
+                                                        }}
                                                     >
-                                                        <GithubIcon className="w-4 h-4" />
-                                                        GitHub
-                                                    </a>
-                                                )
-                                            )}
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
 
-                                            {project.liveUrl && (
-                                                <a
-                                                    href={project.liveUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    className="text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1.5"
+                                            {/* BOTTOM ACTION ROW */}
+                                            <div className="flex justify-between items-center mt-auto pt-2">
+                                                <div className="flex items-center gap-4">
+                                                    {project.isConfidential ? (
+                                                        <span className="text-[13px] text-pink-600 flex items-center gap-1.5 font-bold px-3 py-1.5 rounded-full bg-[#fce7f3] dark:bg-[#be185d]">
+                                                            <Lock className="w-4 h-4" />
+                                                            Confidential
+                                                        </span>
+                                                    ) : (
+                                                        project.githubUrl && (
+                                                            <a
+                                                                href={project.githubUrl}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                                className="text-[13px] font-bold text-[#64748b] hover:text-[#17213c] transition-colors flex items-center gap-1.5"
+                                                            >
+                                                                <GithubIcon className="w-4.5 h-4.5" />
+                                                                GitHub
+                                                            </a>
+                                                        )
+                                                    )}
+
+                                                    {project.liveUrl && (
+                                                        <a
+                                                            href={project.liveUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className="text-[13px] font-bold text-[#64748b] hover:text-[#17213c] transition-colors flex items-center gap-1.5"
+                                                        >
+                                                            <ExternalLink className="w-4.5 h-4.5" />
+                                                            Live Demo
+                                                        </a>
+                                                    )}
+                                                </div>
+
+                                                <button 
+                                                    className="group/btn px-4 py-2.5 rounded-full bg-[#f4f7ff] dark:bg-[#1e2434] text-[#3b82f6] font-bold text-[13px] flex items-center gap-1.5 border border-white/60 transition-all duration-300 hover:-translate-y-[2px]"
+                                                    style={{ boxShadow: '4px 4px 10px rgba(140,160,190,0.2), -4px -4px 10px rgba(255,255,255,0.9)' }}
                                                 >
-                                                    <ExternalLink className="w-3.5 h-3.5" />
-                                                    Live Demo
-                                                </a>
-                                            )}
-
-                                            <span className="ml-auto text-xs font-bold text-blue-600 group-hover:text-blue-700 transition-colors flex items-center gap-1">
-                                                View Details <ArrowRight className="w-3.5 h-3.5" />
-                                            </span>
+                                                    View Details <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </motion.article>
-                            ))
+                                    </motion.article>
+                                );
+                            })
                         )}
                     </AnimatePresence>
                 </motion.div>
