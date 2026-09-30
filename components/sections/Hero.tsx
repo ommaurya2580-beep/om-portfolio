@@ -1,10 +1,12 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Download, ArrowRight, Target, Award, Trophy, Code2, Users, FileText, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, GmailIcon } from '@/components/ui/BrandIcons';
 import { ReactIcon, NextJsIcon, JavascriptIcon, FirebaseIcon, PythonIcon, AWSIcon } from '@/components/ui/TechIcons';
+import { getProjects, getCertifications, getHackathons } from '@/lib/firestore';
 
 const socialLinks = [
     { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <GithubIcon className="w-5 h-5 text-gray-800 dark:text-white" /> },
@@ -22,34 +24,59 @@ const techStack = [
     { name: 'AWS', icon: <AWSIcon className="w-6 h-6" /> },
 ];
 
-const statsCards = [
-    {
-        title: 'Projects',
-        value: '2+',
-        icon: <Target className="w-6 h-6" />,
-        color: 'var(--purple)',
-        bgClass: 'bg-[#f3e8ff] dark:bg-[#6b21a8]',
-        sideIcon: <Code2 className="w-5 h-5 text-accent-blue opacity-50" />
-    },
-    {
-        title: 'Certifications',
-        value: '5+',
-        icon: <Award className="w-6 h-6" />,
-        color: 'var(--orange)',
-        bgClass: 'bg-[#ffedd5] dark:bg-[#c2410c]',
-        sideIcon: <FileText className="w-5 h-5 text-accent-blue opacity-50" />
-    },
-    {
-        title: 'Hackathons',
-        value: '7+',
-        icon: <Trophy className="w-6 h-6" />,
-        color: 'var(--yellow)',
-        bgClass: 'bg-[#fef9c3] dark:bg-[#ca8a04]',
-        sideIcon: <Users className="w-5 h-5 text-accent-blue opacity-50" />
-    }
-];
-
 export default function Hero() {
+    const [counts, setCounts] = useState({ projects: 0, certs: 0, hackathons: 0 });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchCounts() {
+            try {
+                const [projects, certs, hackathons] = await Promise.all([
+                    getProjects(),
+                    getCertifications(),
+                    getHackathons()
+                ]);
+                setCounts({
+                    projects: projects.length,
+                    certs: certs.length,
+                    hackathons: hackathons.length
+                });
+            } catch (error) {
+                console.error("Failed to fetch counts", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchCounts();
+    }, []);
+
+    const statsCards = [
+        {
+            title: 'Projects',
+            value: loading ? '...' : `${counts.projects}+`,
+            icon: <Target className="w-6 h-6" />,
+            color: 'var(--purple)',
+            bgClass: 'bg-[#f3e8ff] dark:bg-[#6b21a8]',
+            sideIcon: <Code2 className="w-5 h-5 text-accent-blue opacity-50" />
+        },
+        {
+            title: 'Certifications',
+            value: loading ? '...' : `${counts.certs}+`,
+            icon: <Award className="w-6 h-6" />,
+            color: 'var(--orange)',
+            bgClass: 'bg-[#ffedd5] dark:bg-[#c2410c]',
+            sideIcon: <FileText className="w-5 h-5 text-accent-blue opacity-50" />
+        },
+        {
+            title: 'Hackathons',
+            value: loading ? '...' : `${counts.hackathons}+`,
+            icon: <Trophy className="w-6 h-6" />,
+            color: 'var(--yellow)',
+            bgClass: 'bg-[#fef9c3] dark:bg-[#ca8a04]',
+            sideIcon: <Users className="w-5 h-5 text-accent-blue opacity-50" />
+        }
+    ];
+
     return (
         <section className="relative min-h-screen pt-28 pb-12 flex items-center overflow-hidden bg-clay-bg">
             {/* Dynamic Background Blobs exactly like the image */}
@@ -61,16 +88,6 @@ export default function Hero() {
                     
                     {/* LEFT COLUMN: Info & CTA */}
                     <div className="lg:col-span-4 flex flex-col justify-center">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-clay-surface rounded-full shadow-clay-input text-xs font-bold text-text-secondary w-fit mb-6"
-                        >
-                            <span className="w-2.5 h-2.5 bg-accent-green rounded-full animate-pulse" />
-                            Available for opportunities
-                        </motion.div>
-
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +161,7 @@ export default function Hero() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-floating flex items-center justify-center hover:-translate-y-1 transition-all"
+                                    className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-card border border-white/50 dark:border-white/5 flex items-center justify-center hover:-translate-y-1 hover:shadow-clay-floating transition-all"
                                     aria-label={social.label}
                                 >
                                     {social.icon}
@@ -160,7 +177,7 @@ export default function Hero() {
                             <p className="text-xs font-bold text-text-muted mb-4 uppercase tracking-wider">Trusted by modern technologies</p>
                             <div className="flex flex-wrap gap-3">
                                 {techStack.map((tech) => (
-                                    <div key={tech.name} className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-floating flex items-center justify-center hover:scale-110 transition-transform cursor-help" title={tech.name}>
+                                    <div key={tech.name} className="w-12 h-12 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-clay-card border border-white/50 dark:border-white/5 flex items-center justify-center hover:scale-110 transition-transform cursor-help" title={tech.name}>
                                         {tech.icon}
                                     </div>
                                 ))}
@@ -170,26 +187,16 @@ export default function Hero() {
 
                     {/* CENTER COLUMN: 3D Illustration Area */}
                     <div className="lg:col-span-5 h-[600px] relative hidden lg:flex items-center justify-center">
-                        {/* Placeholder for the user's 3D image. Replace src with actual image in public folder */}
-                        <motion.img 
-                            initial={{ opacity: 0, scale: 0.8 }}
+                        {/* Abstract floating glowing orb in place of avatar */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1, delay: 0.3 }}
-                            src="/3d-avatar.png" 
-                            alt="3D Avatar" 
-                            className="max-w-[120%] max-h-[120%] object-contain z-10"
-                            style={{ filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.15))' }}
-                            onError={(e) => {
-                                // Fallback if image doesn't exist yet
-                                e.currentTarget.style.display = 'none';
-                                e.currentTarget.parentElement!.innerHTML = `
-                                    <div class="text-center p-8 bg-clay-surface rounded-3xl shadow-clay-card">
-                                        <p class="text-text-muted font-bold mb-2">3D Avatar Placeholder</p>
-                                        <p class="text-xs text-text-secondary">Place your image as <code>/public/3d-avatar.png</code></p>
-                                    </div>
-                                `;
-                            }}
-                        />
+                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            className="absolute w-64 h-64 bg-gradient-to-tr from-blue-200 to-purple-200 dark:from-blue-900 dark:to-purple-900 rounded-full shadow-clay-card flex items-center justify-center pointer-events-none"
+                            style={{ filter: 'drop-shadow(0 20px 30px rgba(124, 58, 237, 0.15))' }}
+                        >
+                            <div className="w-48 h-48 bg-white/40 dark:bg-black/20 rounded-full shadow-clay-input backdrop-blur-sm flex items-center justify-center" />
+                        </motion.div>
 
                         {/* Floating ambient icons mimicking the reference */}
                         <motion.div 
