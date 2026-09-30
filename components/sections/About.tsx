@@ -62,45 +62,12 @@ export default function About() {
                                     Delhi NCR, where I combine academic learning with real-world project experience.
                                 </p>
                             </motion.div>
-
-                            {/* Education Card */}
-                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10">
-                                <div className="flex items-center justify-between mb-8">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-2xl bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input flex items-center justify-center text-accent-green">
-                                            <GraduationCap className="w-6 h-6" />
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-text-primary">
-                                            Education & Experience
-                                        </h3>
-                                    </div>
-                                </div>
-                                
-                                <div className="flex gap-4">
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-4 h-4 rounded-full bg-accent-blue shadow-clay-floating mt-1 z-10" />
-                                        <div className="w-[2px] h-full bg-accent-blue/20 flex-1 my-2 rounded-full" />
-                                    </div>
-                                    <div className="pb-4">
-                                        <div className="inline-block px-3 py-1 bg-[#e0f2fe] dark:bg-[#0369a1] text-accent-blue dark:text-[#e0f2fe] rounded-full text-xs font-bold mb-3 shadow-sm">
-                                            2023 – Present
-                                        </div>
-                                        <div className="bg-[#E9EFF7] dark:bg-[#1e2434] rounded-2xl p-5 shadow-clay-input">
-                                            <h4 className="text-text-primary font-bold text-lg">
-                                                GL Bajaj Institute of Technology and Management
-                                            </h4>
-                                            <p className="text-text-secondary font-medium text-sm mt-1">Delhi NCR, Uttar Pradesh</p>
-                                            <p className="text-text-muted text-sm mt-2 font-semibold">B.Tech - Computer Science & Engineering</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
                         </div>
 
-                        {/* Right: Certifications & Stats */}
+                        {/* Right: Certifications */}
                         <div className="flex flex-col gap-8">
                             {/* Certifications Card */}
-                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10">
+                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10 h-full">
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-12 h-12 rounded-2xl bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input flex items-center justify-center text-accent-orange">
                                         <Award className="w-6 h-6" />
@@ -128,29 +95,6 @@ export default function About() {
                                         </motion.div>
                                     ))}
                                 </div>
-                            </motion.div>
-
-                            {/* Stats */}
-                            <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                {[
-                                    { value: '2+', label: 'Projects', icon: <FolderOpen className="w-5 h-5" />, color: 'text-accent-blue', bg: 'bg-[#e0f2fe] dark:bg-[#0369a1]' },
-                                    { value: '5+', label: 'Certifications', icon: <Award className="w-5 h-5" />, color: 'text-accent-purple', bg: 'bg-[#f3e8ff] dark:bg-[#6b21a8]' },
-                                    { value: '7+', label: 'Hackathons', icon: <Trophy className="w-5 h-5" />, color: 'text-accent-orange', bg: 'bg-[#ffedd5] dark:bg-[#c2410c]' },
-                                ].map((stat, i) => (
-                                    <motion.div
-                                        key={stat.label}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                                        transition={{ delay: 0.6 + i * 0.1 }}
-                                        className="clay-card p-6 flex flex-col items-center justify-center text-center group hover:scale-[1.03] transition-transform duration-300"
-                                    >
-                                        <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} shadow-clay-pill flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300`}>
-                                            {stat.icon}
-                                        </div>
-                                        <p className="text-3xl font-extrabold text-text-primary mb-1">{stat.value}</p>
-                                        <p className="text-text-secondary text-xs uppercase tracking-wider font-bold">{stat.label}</p>
-                                    </motion.div>
-                                ))}
                             </motion.div>
                         </div>
                     </div>
