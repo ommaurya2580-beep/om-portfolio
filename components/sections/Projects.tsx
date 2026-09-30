@@ -6,11 +6,15 @@ import { useInView } from 'react-intersection-observer';
 import { Timestamp } from 'firebase/firestore';
 import { getProjects, type Project } from '@/lib/firestore';
 import ProjectModal from '@/components/ui/ProjectModal';
-import { ProjectCardSkeleton } from '@/components/ui/LoadingSkeleton';
-import { ExternalLink, Lock, Layout, Star, GitFork, ArrowRight, Smartphone, Brain } from 'lucide-react';
+import { ExternalLink, Lock, Layout, Star, GitFork, ArrowRight, Smartphone, Brain, Globe, BookOpen, UserCheck, Leaf, ShoppingCart, Car, Rocket } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandIcons';
 
-const categories = ['All', 'Web App', 'Mobile App', 'AI'];
+const categories = [
+    { name: 'All', icon: Globe },
+    { name: 'Web App', icon: Globe },
+    { name: 'Mobile App', icon: Smartphone },
+    { name: 'AI', icon: Brain }
+];
 
 const baseProjects: Partial<Project>[] = [
     {
@@ -21,7 +25,7 @@ const baseProjects: Partial<Project>[] = [
         techStack: ["Next.js", "Firebase", "Firestore", "Tailwind"],
         liveUrl: "https://aktu-counselling-helper.vercel.app",
         category: "Web App",
-        badge: "Featured Project"
+        badge: "Featured"
     },
     {
         id: '2',
@@ -43,12 +47,30 @@ const baseProjects: Partial<Project>[] = [
     },
     {
         id: '4',
-        title: "Weather Web App",
-        description: "A real-time weather forecasting web application using external weather APIs. Allows city-based search and displays temperature, humidity, and wind data in a clean responsive UI.",
-        techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
-        githubUrl: "https://github.com/ommaurya2580-beep",
+        title: "AgriPulse — AI Powered Smart Agriculture",
+        repo: "agripulse",
+        description: "AI-driven crop health monitoring and decision support platform using IoT sensors and ML models.",
+        techStack: ["Next.js", "Node.js", "MongoDB", "YOLO"],
         category: "Web App",
-        liveUrl: "https://weather-app-five-dun-93.vercel.app"
+        githubUrl: "https://github.com/ommaurya2580-beep"
+    },
+    {
+        id: '5',
+        title: "BuyNora — E-commerce Platform",
+        repo: "buynora",
+        description: "Full-featured e-commerce platform with 27 microservices and modern frontend stack.",
+        techStack: ["React 19", "TypeScript", "Tailwind CSS", "Redux"],
+        category: "Web App",
+        githubUrl: "https://github.com/ommaurya2580-beep"
+    },
+    {
+        id: '6',
+        title: "Smart Parking Capacity Enforcement System",
+        repo: "smart-parking",
+        description: "AI/IoT based smart parking system for real-time monitoring and enforcement.",
+        techStack: ["Flutter", "Firebase", "IoT", "Computer Vision"],
+        category: "Mobile App",
+        githubUrl: "https://github.com/ommaurya2580-beep"
     }
 ];
 
@@ -97,225 +119,295 @@ export default function Projects() {
         ? projects
         : projects.filter((p) => p.category === activeCategory);
 
-    // Get placeholder abstract visual based on category
-    const getCategoryVisual = (category: string) => {
-        if (category === 'Web App') {
+    const getProjectVisual = (project: Project) => {
+        const title = project.title.toLowerCase();
+        
+        if (title.includes('aktu')) {
             return (
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/40 dark:to-cyan-900/40 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0,transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0,transparent_60%)]" />
-                    <div className="w-24 h-16 bg-white dark:bg-[#22283a] rounded-xl shadow-clay-floating rotate-[-5deg] absolute flex items-start px-2 py-2">
-                        <div className="flex gap-1">
-                            <div className="w-2 h-2 rounded-full bg-red-400" />
-                            <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                            <div className="w-2 h-2 rounded-full bg-green-400" />
-                        </div>
+                <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#EDE9FE] dark:from-blue-900/40 dark:to-indigo-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="w-28 h-20 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center p-2 z-10 border-b-4 border-gray-200 dark:border-gray-800">
+                        <Layout className="w-8 h-8 text-blue-500 mb-2" />
+                        <div className="w-16 h-2 bg-blue-100 rounded-full" />
                     </div>
-                    <div className="w-24 h-16 bg-[#e0f2fe] dark:bg-[#0369a1] rounded-xl shadow-clay-pill rotate-[10deg] absolute ml-10 mt-10 flex items-center justify-center">
-                        <Layout className="text-accent-blue w-6 h-6" />
+                    <div className="absolute right-4 bottom-4 w-12 h-12 bg-blue-400 rounded-lg shadow-lg rotate-12 flex items-center justify-center">
+                        <BookOpen className="text-white w-6 h-6" />
                     </div>
-                </div>
-            );
-        } else if (category === 'Mobile App') {
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/40 dark:to-pink-900/40 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0,transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0,transparent_60%)]" />
-                    <div className="w-16 h-28 bg-white dark:bg-[#22283a] rounded-[18px] shadow-clay-floating flex flex-col items-center justify-between p-2 z-10">
-                        <div className="w-6 h-1 bg-gray-200 dark:bg-gray-700 rounded-full" />
-                        <div className="w-full h-20 bg-[#f3e8ff] dark:bg-[#6b21a8] rounded-xl flex items-center justify-center">
-                            <Smartphone className="w-6 h-6 text-accent-purple" />
-                        </div>
-                    </div>
-                </div>
-            );
-        } else {
-            // AI
-            return (
-                <div className="w-full h-full bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/40 dark:to-emerald-900/40 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0,transparent_60%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0,transparent_60%)]" />
-                    <div className="w-20 h-20 bg-white dark:bg-[#22283a] rounded-full shadow-clay-floating flex items-center justify-center z-10">
-                        <Brain className="w-8 h-8 text-accent-green" />
-                    </div>
-                    <div className="absolute w-24 h-24 border-2 border-dashed border-accent-green/30 rounded-full animate-spin-slow" />
                 </div>
             );
         }
+        if (title.includes('spin')) {
+            return (
+                <div className="w-full h-full bg-gradient-to-br from-[#FCE7F3] to-[#F3E8FF] dark:from-pink-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="w-16 h-32 bg-white dark:bg-[#1a1f2c] rounded-[20px] shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center p-2 z-10 border-4 border-pink-200 dark:border-pink-900/50">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-400 to-purple-500 flex items-center justify-center shadow-inner">
+                            <Star className="text-white w-5 h-5" />
+                        </div>
+                    </div>
+                    <div className="absolute left-6 top-6 w-8 h-8 bg-yellow-400 rounded-full shadow-lg" />
+                    <div className="absolute right-8 bottom-6 w-10 h-10 bg-purple-400 rounded-full shadow-lg" />
+                </div>
+            );
+        }
+        if (title.includes('face')) {
+            return (
+                <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#F0FDF4] dark:from-blue-900/40 dark:to-green-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="w-24 h-28 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex flex-col items-center p-4 z-10">
+                        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3">
+                            <UserCheck className="text-blue-500 w-6 h-6" />
+                        </div>
+                        <div className="w-full h-2 bg-gray-100 rounded-full mb-2" />
+                        <div className="w-2/3 h-2 bg-gray-100 rounded-full" />
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-32 h-32 border-4 border-blue-400/30 border-dashed rounded-2xl" />
+                    </div>
+                </div>
+            );
+        }
+        if (title.includes('agripulse')) {
+            return (
+                <div className="w-full h-full bg-gradient-to-br from-[#DCFCE7] to-[#FEF9C3] dark:from-green-900/40 dark:to-yellow-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="w-32 h-20 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
+                         <div className="w-full px-4 flex justify-between items-end h-10">
+                             <div className="w-3 h-6 bg-green-400 rounded-t-sm" />
+                             <div className="w-3 h-10 bg-green-500 rounded-t-sm" />
+                             <div className="w-3 h-4 bg-green-300 rounded-t-sm" />
+                         </div>
+                    </div>
+                    <div className="absolute left-4 bottom-4">
+                        <Leaf className="w-12 h-12 text-green-500 drop-shadow-lg" />
+                    </div>
+                    <div className="absolute right-4 top-4 w-10 h-10 bg-yellow-400 rounded-full shadow-[0_0_20px_rgba(250,204,21,0.6)]" />
+                </div>
+            );
+        }
+        if (title.includes('buynora')) {
+            return (
+                <div className="w-full h-full bg-gradient-to-br from-[#DBEAFE] to-[#EFF6FF] dark:from-blue-900/40 dark:to-blue-800/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="w-28 h-24 bg-white dark:bg-[#1a1f2c] rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
+                         <ShoppingCart className="w-10 h-10 text-blue-500" />
+                    </div>
+                    <div className="absolute right-6 top-6 w-10 h-12 bg-pink-400 rounded-lg shadow-lg rotate-12" />
+                    <div className="absolute left-6 bottom-6 w-12 h-8 bg-purple-400 rounded-lg shadow-lg -rotate-12" />
+                </div>
+            );
+        }
+        if (title.includes('parking')) {
+            return (
+                <div className="w-full h-full bg-gradient-to-br from-[#E0E7FF] to-[#EDE9FE] dark:from-indigo-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                    <div className="absolute left-8 bottom-8 w-24 h-12 bg-red-400 rounded-xl shadow-lg z-20 flex items-center justify-center">
+                        <Car className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="absolute right-10 top-6 w-12 h-16 bg-blue-500 rounded-lg shadow-lg z-10 flex flex-col items-center">
+                        <div className="text-white font-bold text-xl mt-2">P</div>
+                        <div className="w-1 h-8 bg-gray-400 mt-auto" />
+                    </div>
+                    <div className="w-full h-4 bg-gray-300 absolute bottom-4" />
+                </div>
+            );
+        }
+
+        return (
+             <div className="w-full h-full bg-gradient-to-br from-[#E0F2FE] to-[#F3E8FF] dark:from-blue-900/40 dark:to-purple-900/40 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.025] transition-transform duration-300">
+                 <div className="w-20 h-20 bg-white dark:bg-[#1a1f2c] rounded-2xl shadow-[8px_8px_16px_rgba(0,0,0,0.1)] flex items-center justify-center z-10">
+                     <Layout className="w-8 h-8 text-blue-500" />
+                 </div>
+             </div>
+        );
     };
 
     return (
-        <section id="projects" className="relative py-24 sm:py-32 bg-clay-surface">
-            <div className="absolute top-[10%] left-[10%] w-[300px] h-[300px] bg-accent-pink clay-blob" />
+        <section id="projects" className="relative py-24 sm:py-32 bg-[#EEF4FB] dark:bg-[#0f172a] overflow-hidden">
+            {/* Ambient Background Gradients */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+                <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[100px]" />
+                <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[20%] left-[40%] w-[600px] h-[600px] bg-teal-400/10 rounded-full blur-[120px]" />
+            </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="section-heading">
-                        Featured <span className="gradient-text">Projects</span>
-                    </h2>
-                </motion.div>
+            {/* Floating Decorations (z-index 0) */}
+            <div className="absolute top-40 right-20 w-16 h-16 bg-purple-300 dark:bg-purple-800 rounded-2xl rotate-12 blur-[1px] opacity-60 animate-bounce-slow" style={{ zIndex: 0 }} />
+            <div className="absolute bottom-40 left-10 w-20 h-20 bg-blue-300 dark:bg-blue-800 rounded-full blur-[2px] opacity-50 animate-pulse-slow" style={{ zIndex: 0 }} />
+            <div className="absolute top-1/2 right-10 w-12 h-12 bg-pink-300 dark:bg-pink-800 rounded-lg -rotate-12 blur-[1px] opacity-40 animate-float" style={{ zIndex: 0 }} />
 
-                {/* Filter tabs */}
+            <div className="max-w-[1300px] mx-auto px-6 sm:px-8 lg:px-10 relative" style={{ zIndex: 2 }}>
+                
+                {/* SECTION HEADER */}
+                <div className="flex flex-col items-center text-center mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/80 dark:bg-[#1a1f2c]/80 rounded-full shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] dark:shadow-none text-xs font-bold text-text-secondary w-fit mb-6"
+                    >
+                        🚀 My Work
+                    </motion.div>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-4xl sm:text-5xl font-extrabold text-text-primary mb-6"
+                    >
+                        Featured <span className="bg-gradient-to-r from-[#06B6D4] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">Projects</span>
+                    </motion.h2>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-text-muted text-base max-w-xl font-medium"
+                    >
+                        A collection of my best work, built with modern technologies and a passion for solving real-world problems.
+                    </motion.p>
+                </div>
+
+                {/* FILTERS */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-3 mb-16"
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
                 >
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => setActiveCategory(cat)}
-                            className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat
-                                ? 'bg-gradient-primary text-white shadow-clay-pill translate-y-[-2px]'
-                                : 'bg-[#E9EFF7] dark:bg-[#1e2434] text-text-secondary hover:text-text-primary shadow-clay-input hover:shadow-clay-pill'
+                    {categories.map((cat) => {
+                        const Icon = cat.icon;
+                        const isActive = activeCategory === cat.name;
+                        return (
+                            <button
+                                key={cat.name}
+                                onClick={() => setActiveCategory(cat.name)}
+                                className={`px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 transition-all duration-300 ${
+                                    isActive
+                                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
+                                        : 'bg-[#EEF4FB] dark:bg-[#1a1f2c] text-text-secondary hover:text-text-primary shadow-[6px_6px_12px_rgba(148,163,184,0.25),-5px_-5px_10px_rgba(255,255,255,0.85)] dark:shadow-none'
                                 }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
+                            >
+                                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-text-muted'}`} />
+                                {cat.name}
+                            </button>
+                        );
+                    })}
                 </motion.div>
 
-                {/* Project cards */}
-                <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* GRID */}
+                <motion.div
+                    ref={ref}
+                    layout
+                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 sm:gap-8"
+                >
                     <AnimatePresence mode="popLayout">
                         {loading ? (
                             Array.from({ length: 6 }).map((_, i) => (
-                                <motion.div
-                                    key={`skeleton-${i}`}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                >
-                                    <ProjectCardSkeleton />
-                                </motion.div>
+                                <ProjectCardSkeleton key={`skeleton-${i}`} />
                             ))
                         ) : (
                             filtered.map((project, i) => (
-                                <motion.div
-                                    key={project.id}
+                                <motion.article
                                     layout
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.95 }}
-                                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                                    transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 100 }}
+                                    key={project.id}
+                                    className="group bg-[rgba(255,255,255,0.72)] dark:bg-[rgba(30,36,52,0.72)] backdrop-blur-md rounded-[28px] shadow-[12px_14px_28px_rgba(148,163,184,0.25),-8px_-8px_20px_rgba(255,255,255,0.85)] dark:shadow-[8px_8px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-2 cursor-pointer"
+                                    style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.8)' }}
                                     onClick={() => setSelectedProject(project)}
-                                    className="h-full cursor-pointer group"
                                 >
-                                    <div className="clay-card h-full flex flex-col overflow-hidden">
-                                        {/* Card header / Visual */}
-                                        <div className="h-48 relative overflow-hidden flex-shrink-0 bg-[#E9EFF7] dark:bg-[#1e2434]">
-                                            {getCategoryVisual(project.category || 'Web App')}
-                                            
-                                            {/* Badges container */}
-                                            <div className="absolute top-4 right-4 flex gap-2 z-20">
-                                                {project.badge && (
-                                                    <span className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-[#ffedd5] text-accent-orange shadow-sm flex items-center gap-1 uppercase tracking-wider">
-                                                        🔥 {project.badge}
-                                                    </span>
-                                                )}
-                                                <span
-                                                    className="px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 text-accent-blue shadow-sm"
-                                                >
-                                                    {project.category}
-                                                </span>
-                                            </div>
+                                    {/* VISUAL AREA */}
+                                    <div className="w-full h-48 sm:h-56 relative overflow-hidden">
+                                        {getProjectVisual(project)}
+                                        
+                                        {/* Badges on top of visual */}
+                                        <div className="absolute top-4 left-4 flex gap-2">
+                                            {project.badge && (
+                                                <div className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-[#F8FAFC] dark:bg-[#1a1f2c] text-accent-yellow shadow-[3px_4px_8px_rgba(148,163,184,0.2),-2px_-2px_5px_rgba(255,255,255,0.8)] dark:shadow-none flex items-center gap-1">
+                                                    ⭐ {project.badge}
+                                                </div>
+                                            )}
                                         </div>
-
-                                        {/* Card body */}
-                                        <div className="p-6 flex flex-col flex-grow">
-                                            <h3 className="text-text-primary font-extrabold text-xl mb-3 group-hover:text-accent-blue transition-colors">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-text-secondary text-sm leading-relaxed line-clamp-3 mb-6 flex-grow font-medium">
-                                                {project.description}
-                                            </p>
-
-                                            {/* Tech stack */}
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                {project.techStack.slice(0, 3).map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-[#E9EFF7] dark:bg-[#1e2434] text-text-secondary shadow-clay-input"
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                                {project.techStack.length > 3 && (
-                                                    <span className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-[#E9EFF7] dark:bg-[#1e2434] text-text-muted shadow-clay-input">
-                                                        +{project.techStack.length - 3}
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            {/* Links & Stats */}
-                                            <div className="flex flex-wrap items-center gap-4 mt-auto pt-5 border-t border-[#E9EFF7] dark:border-[#1e2434]">
-                                                {project.isConfidential ? (
-                                                    <span className="text-xs text-accent-pink flex items-center gap-1.5 font-bold uppercase px-3 py-1.5 rounded-full bg-[#fce7f3] dark:bg-[#be185d]">
-                                                        <Lock className="w-3.5 h-3.5" />
-                                                        Confidential
-                                                    </span>
-                                                ) : (
-                                                    project.githubUrl && (
-                                                        <a
-                                                            href={project.githubUrl}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            onClick={(e) => e.stopPropagation()}
-                                                            className="text-sm font-bold text-text-secondary hover:text-accent-blue transition-colors flex items-center gap-1.5"
-                                                        >
-                                                            <GithubIcon className="w-4 h-4" />
-                                                            Code
-                                                        </a>
-                                                    )
-                                                )}
-
-                                                {project.liveUrl && (
-                                                    <a
-                                                        href={project.liveUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        className="text-sm font-bold text-text-secondary hover:text-accent-green transition-colors flex items-center gap-1.5"
-                                                    >
-                                                        <ExternalLink className="w-4 h-4" />
-                                                        Live
-                                                    </a>
-                                                )}
-
-                                                {/* Stats */}
-                                                {!project.isConfidential && (project.stars !== undefined || project.forks !== undefined) && (
-                                                    <div className="flex items-center gap-3 ml-auto text-xs font-bold text-text-muted">
-                                                        {project.stars !== undefined && project.stars > 0 && (
-                                                            <span className="flex items-center gap-1">
-                                                                <Star className="w-3.5 h-3.5 text-accent-yellow" /> {project.stars}
-                                                            </span>
-                                                        )}
-                                                        {project.forks !== undefined && project.forks > 0 && (
-                                                            <span className="flex items-center gap-1">
-                                                                <GitFork className="w-3.5 h-3.5 text-text-muted" /> {project.forks}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                )}
-
-                                                <span className={`${project.isConfidential || (!project.stars && !project.forks) ? 'ml-auto ' : ''}text-sm font-bold text-text-muted group-hover:text-accent-blue transition-colors flex items-center gap-1`}>
-                                                    Details <ArrowRight className="w-4 h-4" />
-                                                </span>
+                                        <div className="absolute bottom-4 left-4">
+                                            <div className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/90 dark:bg-[#1a1f2c]/90 text-accent-blue shadow-sm flex items-center gap-1 backdrop-blur-sm">
+                                                <Globe className="w-3 h-3" /> {project.category}
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+
+                                    {/* CONTENT AREA */}
+                                    <div className="p-6 flex flex-col flex-grow">
+                                        <h3 className="text-[#0f172a] dark:text-white font-bold text-lg sm:text-xl mb-2 leading-tight">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-text-secondary text-sm leading-relaxed line-clamp-2 mb-5 font-medium">
+                                            {project.description}
+                                        </p>
+
+                                        {/* Tech Chips */}
+                                        <div className="flex flex-wrap gap-2 mb-6">
+                                            {project.techStack.slice(0, 3).map((tech) => (
+                                                <span
+                                                    key={tech}
+                                                    className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#EEF4FB] dark:bg-[#1e2434] text-text-secondary shadow-[inset_1px_1px_3px_rgba(148,163,184,0.2)] dark:shadow-none"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                            {project.techStack.length > 3 && (
+                                                <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[#EEF4FB] dark:bg-[#1e2434] text-text-muted shadow-[inset_1px_1px_3px_rgba(148,163,184,0.2)] dark:shadow-none">
+                                                    +{project.techStack.length - 3}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {/* ACTION ROW */}
+                                        <div className="flex items-center gap-4 mt-auto pt-4">
+                                            {project.isConfidential ? (
+                                                <span className="text-xs text-accent-pink flex items-center gap-1.5 font-bold uppercase px-3 py-1.5 rounded-full bg-[#fce7f3] dark:bg-[#be185d]">
+                                                    <Lock className="w-3.5 h-3.5" />
+                                                    Confidential
+                                                </span>
+                                            ) : (
+                                                project.githubUrl && (
+                                                    <a
+                                                        href={project.githubUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="text-xs font-bold text-text-secondary hover:text-[#0f172a] dark:hover:text-white transition-colors flex items-center gap-1.5"
+                                                    >
+                                                        <GithubIcon className="w-4 h-4" />
+                                                        GitHub
+                                                    </a>
+                                                )
+                                            )}
+
+                                            {project.liveUrl && (
+                                                <a
+                                                    href={project.liveUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="text-xs font-bold text-text-secondary hover:text-[#0f172a] dark:hover:text-white transition-colors flex items-center gap-1.5"
+                                                >
+                                                    <ExternalLink className="w-4 h-4" />
+                                                    Live Demo
+                                                </a>
+                                            )}
+
+                                            <span className="ml-auto text-xs font-bold text-accent-blue group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                                                View Details <ArrowRight className="w-4 h-4" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </motion.article>
                             ))
                         )}
                     </AnimatePresence>
                 </motion.div>
             </div>
 
-            {/* Project Modal */}
             <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
         </section>
     );
