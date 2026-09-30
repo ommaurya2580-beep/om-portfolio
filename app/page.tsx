@@ -4,7 +4,6 @@ import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
 import Projects from '@/components/sections/Projects';
 import Internships from '@/components/sections/Internships';
-import Certifications from '@/components/sections/Certifications';
 import Hackathons from '@/components/sections/Hackathons';
 import CodingProfiles from '@/components/sections/CodingProfiles';
 import ApkDownloads from '@/components/sections/ApkDownloads';
@@ -20,7 +19,6 @@ export default function Home() {
       <Skills />
       <Projects />
       <Internships />
-      <Certifications />
       <Hackathons />
       <CodingProfiles />
       <ApkDownloads />

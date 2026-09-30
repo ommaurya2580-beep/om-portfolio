@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
@@ -22,82 +21,109 @@ export default function Navbar() {
     const [activeSection, setActiveSection] = useState('');
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+            
+            // Basic scroll spy
+            const sections = navLinks.map(link => link.href.substring(1));
+            let current = '';
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        current = section;
+                        break;
+                    }
+                }
+            }
+            if (current) setActiveSection(current);
+        };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <>
-            <motion.nav
+            <motion.div
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-                className={`fixed top-0 left-0 right-0 z-[9980] transition-all duration-500 ${scrolled ? 'glass-dark border-b border-[#00f5ff]/10 py-3' : 'py-5'
-                    }`}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="fixed top-4 left-0 right-0 z-[9980] flex justify-center px-4"
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                <nav className={`transition-all duration-500 rounded-full flex items-center justify-between px-6 py-3 w-full max-w-6xl
+                    ${scrolled 
+                        ? 'bg-white/80 dark:bg-[#22283a]/80 backdrop-blur-xl shadow-clay-floating border border-white/50 dark:border-white/5' 
+                        : 'bg-transparent'
+                    }`}
+                >
                     {/* Logo */}
                     <motion.a
                         href="#"
                         whileHover={{ scale: 1.05 }}
-                        className="text-xl font-bold font-mono gradient-text"
+                        className="text-xl font-bold font-mono gradient-text mr-8"
                     >
                         {'<OM />'}
                     </motion.a>
 
                     {/* Desktop nav */}
                     <div className="hidden lg:flex items-center gap-1">
-                        {navLinks.map((link) => (
-                            <motion.a
-                                key={link.label}
-                                href={link.href}
-                                whileHover={{ y: -2 }}
-                                className="px-3 py-2 text-sm text-slate-400 hover:text-[#00f5ff] transition-colors duration-200 relative group"
-                            >
-                                {link.label}
-                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#00f5ff] group-hover:w-full transition-all duration-300" />
-                            </motion.a>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isActive = activeSection === link.href.substring(1);
+                            return (
+                                <motion.a
+                                    key={link.label}
+                                    href={link.href}
+                                    whileHover={{ y: -2 }}
+                                    className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 relative group
+                                        ${isActive 
+                                            ? 'text-accent-blue bg-gradient-active shadow-clay-pill dark:bg-none dark:bg-[#1a1f2c] dark:text-accent-cyan' 
+                                            : 'text-text-secondary hover:text-text-primary'
+                                        }`}
+                                >
+                                    {link.label}
+                                </motion.a>
+                            )
+                        })}
                     </div>
 
                     {/* Right side */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 ml-auto lg:ml-8">
                         <ThemeToggle />
                         {/* Mobile menu button */}
                         <button
-                            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px] glass rounded-lg border border-white/10"
+                            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px] rounded-full bg-clay-surface shadow-clay-pill text-accent-blue"
                             onClick={() => setMenuOpen(!menuOpen)}
                             aria-label="Toggle menu"
                         >
                             <motion.span
                                 animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                                className="w-5 h-[1.5px] bg-[#00f5ff] block transition-all"
+                                className="w-5 h-[2px] bg-current block transition-all rounded-full"
                             />
                             <motion.span
                                 animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                                className="w-5 h-[1.5px] bg-[#00f5ff] block"
+                                className="w-5 h-[2px] bg-current block rounded-full"
                             />
                             <motion.span
                                 animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                                className="w-5 h-[1.5px] bg-[#00f5ff] block transition-all"
+                                className="w-5 h-[2px] bg-current block transition-all rounded-full"
                             />
                         </button>
                     </div>
-                </div>
-            </motion.nav>
+                </nav>
+            </motion.div>
 
             {/* Mobile menu */}
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed top-[60px] left-0 right-0 z-[9970] glass-dark border-b border-[#00f5ff]/10 lg:hidden"
+                        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="fixed top-[80px] left-4 right-4 z-[9970] bg-clay-surface rounded-3xl shadow-clay-floating border border-clay-highlight p-4 lg:hidden"
                     >
-                        <div className="flex flex-col p-4 gap-1">
+                        <div className="flex flex-col gap-2">
                             {navLinks.map((link, i) => (
                                 <motion.a
                                     key={link.label}
@@ -106,7 +132,11 @@ export default function Navbar() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
                                     onClick={() => setMenuOpen(false)}
-                                    className="px-4 py-3 text-slate-300 hover:text-[#00f5ff] hover:bg-white/5 rounded-lg transition-all duration-200 text-sm"
+                                    className={`px-4 py-3 rounded-2xl transition-all duration-200 text-sm font-medium
+                                        ${activeSection === link.href.substring(1)
+                                            ? 'bg-gradient-active text-accent-blue shadow-clay-pill dark:bg-[#1a1f2c]'
+                                            : 'text-text-secondary hover:text-text-primary hover:bg-[#e2e8f0]/50 dark:hover:bg-[#1a1f2c]'
+                                        }`}
                                 >
                                     {link.label}
                                 </motion.a>

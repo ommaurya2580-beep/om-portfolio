@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Outfit, JetBrains_Mono } from 'next/font/google';
+import { Manrope, JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 import LenisProvider from '@/components/providers/LenisProvider';
@@ -8,9 +8,9 @@ import ScrollProgress from '@/components/ui/ScrollProgress';
 import PageLoader from '@/components/ui/PageLoader';
 import './globals.css';
 
-const outfit = Outfit({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-manrope',
   display: 'swap',
 });
 
@@ -89,9 +89,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${jetbrainsMono.variable}`}>
-      <body className="bg-[#020209] text-slate-200 antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LenisProvider>
             <PageLoader />
             <CustomCursor />
@@ -101,17 +101,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               position="bottom-right"
               toastOptions={{
                 style: {
-                  background: 'rgba(6, 6, 20, 0.95)',
-                  color: '#00f5ff',
-                  border: '1px solid rgba(0, 245, 255, 0.3)',
+                  background: 'var(--clay-surface)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--clay-highlight)',
                   backdropFilter: 'blur(20px)',
-                  fontFamily: 'var(--font-outfit)',
+                  fontFamily: 'var(--font-manrope)',
+                  boxShadow: '0 12px 30px rgba(148,163,184,0.25)',
                 },
                 success: {
-                  iconTheme: { primary: '#00ff88', secondary: '#020209' },
+                  iconTheme: { primary: 'var(--green)', secondary: '#fff' },
                 },
                 error: {
-                  iconTheme: { primary: '#ff0080', secondary: '#020209' },
+                  iconTheme: { primary: 'var(--pink)', secondary: '#fff' },
                 },
               }}
             />

@@ -5,11 +5,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
+import { MapPin, Briefcase, Send, Github, Linkedin, Code2 } from 'lucide-react';
 
 const socialLinks = [
-    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', color: '#00f5ff' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', color: '#0077b5' },
-    { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', color: '#ffa116' },
+    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <Github className="w-5 h-5" />, color: 'var(--blue)' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <Linkedin className="w-5 h-5" />, color: 'var(--cyan)' },
+    { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', icon: <Code2 className="w-5 h-5" />, color: 'var(--orange)' },
 ];
 
 export default function Contact() {
@@ -31,7 +32,7 @@ export default function Contact() {
                 { from_name: form.name, from_email: form.email, message: form.message, to_name: 'Om Maurya' },
                 process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
             );
-            toast.success('Message sent! I\'ll get back to you soon 🚀');
+            toast.success('Message sent! I\'ll get back to you soon 👍');
             setForm({ name: '', email: '', message: '' });
         } catch {
             toast.error('Failed to send. Please try again or email directly.');
@@ -41,10 +42,11 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="relative py-32 bg-[#060614]">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#bf00ff]/5 rounded-full blur-3xl" />
+        <section id="contact" className="relative py-24 sm:py-32 bg-clay-bg">
+            <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] bg-accent-pink clay-blob" />
+            <div className="absolute top-[20%] right-[10%] w-[250px] h-[250px] bg-accent-blue clay-blob" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
                     ref={ref}
                     initial={{ opacity: 0, y: 40 }}
@@ -52,66 +54,66 @@ export default function Contact() {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-20"
                 >
-                    <p className="text-[#00f5ff] font-mono text-sm mb-3">{'// 09. contact'}</p>
-                    <h2 className="section-heading text-white">
+                    <h2 className="section-heading">
                         Get In <span className="gradient-text">Touch</span>
                     </h2>
-                    <p className="text-slate-400 mt-4 max-w-xl mx-auto">
+                    <p className="text-text-secondary mt-4 max-w-xl mx-auto font-medium">
                         Have a project in mind or want to collaborate? I'd love to hear from you.
                     </p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
                     {/* Form */}
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.2 }}
+                        className="clay-card p-8 sm:p-10"
                     >
-                        <form onSubmit={handleSubmit} className="space-y-5">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             {[
                                 { key: 'name', label: 'Your Name', type: 'text', placeholder: 'John Doe' },
                                 { key: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
                             ].map((field) => (
                                 <div key={field.key}>
-                                    <label className="block text-sm text-slate-400 mb-2 font-mono">{field.label}</label>
+                                    <label className="block text-sm font-bold text-text-primary mb-2 pl-2">{field.label}</label>
                                     <input
                                         type={field.type}
                                         placeholder={field.placeholder}
                                         value={form[field.key as keyof typeof form]}
                                         onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl glass border border-white/10 bg-transparent text-white placeholder-slate-600 focus:outline-none focus:border-[#00f5ff]/50 focus:shadow-[0_0_20px_rgba(0,245,255,0.1)] transition-all duration-300"
+                                        className="clay-input"
                                     />
                                 </div>
                             ))}
                             <div>
-                                <label className="block text-sm text-slate-400 mb-2 font-mono">Message</label>
+                                <label className="block text-sm font-bold text-text-primary mb-2 pl-2">Message</label>
                                 <textarea
                                     rows={5}
                                     placeholder="Tell me about your project..."
                                     value={form.message}
                                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl glass border border-white/10 bg-transparent text-white placeholder-slate-600 focus:outline-none focus:border-[#00f5ff]/50 focus:shadow-[0_0_20px_rgba(0,245,255,0.1)] transition-all duration-300 resize-none"
+                                    className="clay-input resize-none py-4"
                                 />
                             </div>
                             <motion.button
                                 type="submit"
                                 disabled={sending}
-                                whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(0, 245, 255, 0.3)' }}
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full py-4 rounded-xl font-semibold text-[#020209] bg-gradient-to-r from-[#00f5ff] to-[#bf00ff] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                                className="w-full py-4 clay-btn-primary gap-2 mt-4 text-base font-bold"
                             >
                                 {sending ? (
                                     <span className="flex items-center justify-center gap-2">
                                         <motion.span
                                             animate={{ rotate: 360 }}
                                             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                                            className="w-4 h-4 border-2 border-[#020209] border-t-transparent rounded-full inline-block"
+                                            className="w-5 h-5 border-2 border-white border-t-transparent rounded-full inline-block"
                                         />
                                         Sending...
                                     </span>
                                 ) : (
-                                    'Send Message →'
+                                    <>
+                                        Send Message <Send className="w-4 h-4 ml-1" />
+                                    </>
                                 )}
                             </motion.button>
                         </form>
@@ -122,51 +124,50 @@ export default function Contact() {
                         initial={{ opacity: 0, x: 40 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.3 }}
-                        className="flex flex-col justify-between"
+                        className="flex flex-col gap-8"
                     >
-                        <div className="glass rounded-2xl p-8 border border-white/5 mb-6">
-                            <h3 className="text-white font-bold text-xl mb-2">Let's Build Something</h3>
-                            <p className="text-slate-400 leading-relaxed mb-6">
+                        <div className="clay-card p-8 sm:p-10">
+                            <h3 className="text-text-primary font-bold text-2xl mb-4">Let's Build Something</h3>
+                            <p className="text-text-secondary leading-relaxed mb-8 font-medium">
                                 I'm currently open to internship opportunities, freelance projects, and collaborations.
                                 Whether you have a question or just want to say hi, my inbox is always open!
                             </p>
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3 text-slate-400 text-sm">
-                                    <span className="text-[#00f5ff]">📍</span>
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-4 text-text-secondary font-medium">
+                                    <div className="w-10 h-10 rounded-xl bg-[#e0f2fe] dark:bg-[#0369a1] text-accent-blue shadow-clay-pill flex items-center justify-center flex-shrink-0">
+                                        <MapPin className="w-5 h-5" />
+                                    </div>
                                     Delhi NCR, Uttar Pradesh, India
                                 </div>
-                                <div className="flex items-center gap-3 text-slate-400 text-sm">
-                                    <span className="text-[#00ff88]">✅</span>
+                                <div className="flex items-center gap-4 text-text-secondary font-medium">
+                                    <div className="w-10 h-10 rounded-xl bg-[#dcfce7] dark:bg-[#15803d] text-accent-green shadow-clay-pill flex items-center justify-center flex-shrink-0">
+                                        <Briefcase className="w-5 h-5" />
+                                    </div>
                                     Available for opportunities
                                 </div>
                             </div>
                         </div>
 
                         {/* Social links */}
-                        <div className="glass rounded-2xl p-6 border border-white/5">
-                            <p className="text-slate-500 text-sm font-mono mb-4">// connect with me</p>
-                            <div className="flex gap-4">
+                        <div className="clay-card p-8 sm:p-10">
+                            <h3 className="text-text-primary font-bold text-lg mb-6 text-center">Connect With Me</h3>
+                            <div className="flex flex-col sm:flex-row gap-4">
                                 {socialLinks.map((social) => (
                                     <motion.a
                                         key={social.label}
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.1, y: -4 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className="flex-1 py-3 rounded-xl glass border border-white/10 text-center text-sm text-slate-400 hover:text-white transition-all duration-300"
-                                        onMouseEnter={(e) => {
-                                            (e.currentTarget as HTMLElement).style.borderColor = social.color;
-                                            (e.currentTarget as HTMLElement).style.color = social.color;
-                                            (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px ${social.color}30`;
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            (e.currentTarget as HTMLElement).style.borderColor = '';
-                                            (e.currentTarget as HTMLElement).style.color = '';
-                                            (e.currentTarget as HTMLElement).style.boxShadow = '';
-                                        }}
+                                        whileHover={{ y: -2 }}
+                                        className="flex-1 py-4 px-2 rounded-[20px] bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input hover:shadow-clay-pill text-center flex flex-col items-center justify-center gap-2 transition-all duration-300 group"
+                                        style={{ '--hover-color': social.color } as React.CSSProperties}
                                     >
-                                        {social.label}
+                                        <span className="text-text-secondary group-hover:text-[var(--hover-color)] transition-colors duration-300">
+                                            {social.icon}
+                                        </span>
+                                        <span className="text-xs font-bold text-text-primary group-hover:text-[var(--hover-color)] transition-colors duration-300">
+                                            {social.label}
+                                        </span>
                                     </motion.a>
                                 ))}
                             </div>

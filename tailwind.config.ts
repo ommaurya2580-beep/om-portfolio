@@ -10,52 +10,57 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['var(--font-outfit)', 'sans-serif'],
+                sans: ['var(--font-manrope)', 'sans-serif'],
                 mono: ['var(--font-jetbrains)', 'monospace'],
             },
             colors: {
-                neon: {
-                    cyan: '#00f5ff',
-                    purple: '#bf00ff',
-                    green: '#00ff88',
-                    pink: '#ff0080',
+                clay: {
+                    bg: 'var(--clay-bg)',
+                    surface: 'var(--clay-surface)',
+                    shadow: 'var(--clay-shadow)',
+                    highlight: 'var(--clay-highlight)',
+                },
+                accent: {
+                    blue: 'var(--blue)',
+                    cyan: 'var(--cyan)',
+                    purple: 'var(--purple)',
+                    green: 'var(--green)',
+                    pink: 'var(--pink)',
+                    orange: 'var(--orange)',
+                    yellow: 'var(--yellow)',
+                },
+                text: {
+                    primary: 'var(--text-primary)',
+                    secondary: 'var(--text-secondary)',
+                    muted: 'var(--text-muted)',
                 },
                 dark: {
-                    900: '#020209',
-                    800: '#060614',
-                    700: '#0a0a1f',
-                    600: '#0f0f2d',
-                    500: '#151540',
+                    900: '#1a1f2c',
+                    800: '#22283a',
+                    700: '#333b4f',
                 },
+            },
+            boxShadow: {
+                'clay-card': '12px 16px 30px rgba(148,163,184,0.28), -8px -8px 20px rgba(255,255,255,0.85), inset 0 2px 0 rgba(255,255,255,0.75)',
+                'clay-card-dark': '12px 16px 30px rgba(0,0,0,0.4), -8px -8px 20px rgba(255,255,255,0.05), inset 0 2px 0 rgba(255,255,255,0.1)',
+                'clay-btn': '4px 6px 15px rgba(148,163,184,0.3), -4px -4px 10px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.8)',
+                'clay-input': 'inset 4px 5px 10px rgba(148,163,184,0.25), inset -4px -4px 10px rgba(255,255,255,0.85)',
+                'clay-pill': '0 5px 12px rgba(148,163,184,0.25), inset 0 2px 0 rgba(255,255,255,0.9)',
+                'clay-floating': '0 12px 30px rgba(148,163,184,0.25), 0 -4px 10px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.75)',
             },
             animation: {
-                'float': 'float 6s ease-in-out infinite',
-                'glow': 'glow 2s ease-in-out infinite alternate',
-                'pulse-neon': 'pulseNeon 2s ease-in-out infinite',
-                'gradient-x': 'gradientX 4s ease infinite',
+                'float-subtle': 'floatSubtle 6s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                'float-slow': 'floatSubtle 8s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate',
             },
             keyframes: {
-                float: {
+                floatSubtle: {
                     '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-20px)' },
-                },
-                glow: {
-                    '0%': { boxShadow: '0 0 5px #00f5ff, 0 0 10px #00f5ff' },
-                    '100%': { boxShadow: '0 0 20px #00f5ff, 0 0 40px #00f5ff, 0 0 80px #00f5ff' },
-                },
-                pulseNeon: {
-                    '0%, 100%': { opacity: '1' },
-                    '50%': { opacity: '0.5' },
-                },
-                gradientX: {
-                    '0%, 100%': { backgroundPosition: '0% 50%' },
-                    '50%': { backgroundPosition: '100% 50%' },
+                    '50%': { transform: 'translateY(-12px)' },
                 },
             },
             backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-                'hero-gradient': 'linear-gradient(135deg, #020209 0%, #0a0a1f 50%, #060614 100%)',
+                'gradient-primary': 'linear-gradient(90deg, var(--cyan), var(--blue), var(--purple))',
+                'gradient-active': 'linear-gradient(135deg, #FFFFFF, #E8EEF8)',
             },
         },
     },

@@ -2,10 +2,11 @@
 
 import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { User, Award, FolderOpen, Trophy, GraduationCap, ArrowRight } from 'lucide-react';
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const certifications = [
@@ -20,12 +21,11 @@ export default function About() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
     return (
-        <section id="about" className="relative py-32 bg-[#020209]">
-            {/* Background accent */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#00f5ff]/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#bf00ff]/5 rounded-full blur-3xl" />
+        <section id="about" className="relative py-24 sm:py-32 bg-clay-bg">
+            <div className="absolute top-[20%] left-[-10%] w-96 h-96 bg-accent-cyan clay-blob" />
+            <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 bg-accent-purple clay-blob" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
                     ref={ref}
                     initial="hidden"
@@ -33,91 +33,123 @@ export default function About() {
                     variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
                 >
                     {/* Section header */}
-                    <motion.div variants={fadeUp} className="text-center mb-20">
-                        <p className="text-[#00f5ff] font-mono text-sm mb-3">{'// 01. about_me'}</p>
-                        <h2 className="section-heading text-white">
+                    <motion.div variants={fadeUp} className="text-center mb-16">
+                        <h2 className="section-heading">
                             About <span className="gradient-text">Me</span>
                         </h2>
                     </motion.div>
 
-                    <div className="grid lg:grid-cols-2 gap-16 items-start">
-                        {/* Left: Summary */}
-                        <div>
-                            <motion.div variants={fadeUp} className="glass rounded-2xl p-8 border border-white/5 mb-8">
-                                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <span className="text-[#00f5ff]">{'<'}</span>
-                                    Professional Summary
-                                    <span className="text-[#00f5ff]">{'/>'}</span>
-                                </h3>
-                                <p className="text-slate-400 leading-relaxed">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {/* Left: Summary & Education */}
+                        <div className="flex flex-col gap-8">
+                            {/* Summary Card */}
+                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-12 h-12 rounded-2xl bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input flex items-center justify-center text-accent-purple">
+                                        <User className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-text-primary">
+                                        Professional Summary
+                                    </h3>
+                                </div>
+                                <p className="text-text-secondary font-medium leading-relaxed mb-4">
                                     Passionate Full Stack Developer and Cyber Security Intern with strong interest in AI,
                                     Cloud Computing, and problem-solving. Experienced in building scalable web applications
                                     and participating in hackathons and coding competitions.
                                 </p>
-                                <p className="text-slate-400 leading-relaxed mt-4">
+                                <p className="text-text-secondary font-medium leading-relaxed">
                                     Currently pursuing my degree at GL Bajaj Institute of Technology and Management,
                                     Delhi NCR, where I combine academic learning with real-world project experience.
                                 </p>
                             </motion.div>
 
-                            {/* Education */}
-                            <motion.div variants={fadeUp} className="glass rounded-2xl p-8 border border-white/5">
-                                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                    <span className="text-[#00ff88]">{'<'}</span>
-                                    Education
-                                    <span className="text-[#00ff88]">{'/>'}</span>
-                                </h3>
-                                <div className="relative pl-6 border-l-2 border-[#00f5ff]/30">
-                                    <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-[#00f5ff] glow-pulse" />
-                                    <div>
-                                        <p className="text-[#00f5ff] text-sm font-mono mb-1">2023 – Present</p>
-                                        <h4 className="text-white font-semibold text-lg">
-                                            GL Bajaj Institute of Technology and Management
-                                        </h4>
-                                        <p className="text-slate-400 text-sm mt-1">Delhi NCR, Uttar Pradesh</p>
-                                        <p className="text-slate-500 text-sm mt-1">B.Tech – Computer Science & Engineering</p>
+                            {/* Education Card */}
+                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10">
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-2xl bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input flex items-center justify-center text-accent-green">
+                                            <GraduationCap className="w-6 h-6" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-text-primary">
+                                            Education & Experience
+                                        </h3>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex gap-4">
+                                    <div className="flex flex-col items-center">
+                                        <div className="w-4 h-4 rounded-full bg-accent-blue shadow-clay-floating mt-1 z-10" />
+                                        <div className="w-[2px] h-full bg-accent-blue/20 flex-1 my-2 rounded-full" />
+                                    </div>
+                                    <div className="pb-4">
+                                        <div className="inline-block px-3 py-1 bg-[#e0f2fe] dark:bg-[#0369a1] text-accent-blue dark:text-[#e0f2fe] rounded-full text-xs font-bold mb-3 shadow-sm">
+                                            2023 – Present
+                                        </div>
+                                        <div className="bg-[#E9EFF7] dark:bg-[#1e2434] rounded-2xl p-5 shadow-clay-input">
+                                            <h4 className="text-text-primary font-bold text-lg">
+                                                GL Bajaj Institute of Technology and Management
+                                            </h4>
+                                            <p className="text-text-secondary font-medium text-sm mt-1">Delhi NCR, Uttar Pradesh</p>
+                                            <p className="text-text-muted text-sm mt-2 font-semibold">B.Tech - Computer Science & Engineering</p>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
                         </div>
 
-                        {/* Right: Certifications */}
-                        <div>
-                            <motion.div variants={fadeUp} className="glass rounded-2xl p-8 border border-white/5">
-                                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                    <span className="text-[#bf00ff]">{'<'}</span>
-                                    Certifications
-                                    <span className="text-[#bf00ff]">{'/>'}</span>
-                                </h3>
-                                <div className="space-y-3">
+                        {/* Right: Certifications & Stats */}
+                        <div className="flex flex-col gap-8">
+                            {/* Certifications Card */}
+                            <motion.div variants={fadeUp} className="clay-card p-8 sm:p-10">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-12 h-12 rounded-2xl bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input flex items-center justify-center text-accent-orange">
+                                        <Award className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-text-primary">
+                                        Certifications
+                                    </h3>
+                                </div>
+                                <div className="space-y-4">
                                     {certifications.map((cert, i) => (
                                         <motion.div
                                             key={cert}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={inView ? { opacity: 1, x: 0 } : {}}
-                                            transition={{ delay: 0.5 + i * 0.1 }}
-                                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors duration-200 group"
+                                            transition={{ delay: 0.4 + i * 0.1 }}
+                                            className="flex items-center justify-between p-4 rounded-[20px] bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input group hover:shadow-clay-floating transition-shadow duration-300"
                                         >
-                                            <span className="mt-1 w-5 h-5 rounded-full bg-[#00f5ff]/10 border border-[#00f5ff]/30 flex items-center justify-center flex-shrink-0 group-hover:bg-[#00f5ff]/20 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#00f5ff]" />
-                                            </span>
-                                            <span className="text-slate-300 text-sm leading-relaxed">{cert}</span>
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-xl bg-clay-surface shadow-clay-pill flex items-center justify-center flex-shrink-0 text-accent-blue group-hover:scale-110 transition-transform duration-300">
+                                                    <Award className="w-5 h-5" />
+                                                </div>
+                                                <span className="text-text-primary font-semibold text-sm leading-tight pr-4">{cert}</span>
+                                            </div>
+                                            <ArrowRight className="w-4 h-4 text-text-muted flex-shrink-0 group-hover:text-accent-blue transition-colors" />
                                         </motion.div>
                                     ))}
                                 </div>
                             </motion.div>
 
                             {/* Stats */}
-                            <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mt-6">
+                            <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 {[
-                                    { value: '2+', label: 'Projects' },
-                                    { value: '5+', label: 'Certifications' },
-                                    { value: '7+', label: 'Hackathons' },
-                                ].map((stat) => (
-                                    <div key={stat.label} className="glass rounded-xl p-4 border border-white/5 text-center">
-                                        <p className="text-2xl font-bold gradient-text">{stat.value}</p>
-                                        <p className="text-slate-500 text-xs mt-1">{stat.label}</p>
-                                    </div>
+                                    { value: '2+', label: 'Projects', icon: <FolderOpen className="w-5 h-5" />, color: 'text-accent-blue', bg: 'bg-[#e0f2fe] dark:bg-[#0369a1]' },
+                                    { value: '5+', label: 'Certifications', icon: <Award className="w-5 h-5" />, color: 'text-accent-purple', bg: 'bg-[#f3e8ff] dark:bg-[#6b21a8]' },
+                                    { value: '7+', label: 'Hackathons', icon: <Trophy className="w-5 h-5" />, color: 'text-accent-orange', bg: 'bg-[#ffedd5] dark:bg-[#c2410c]' },
+                                ].map((stat, i) => (
+                                    <motion.div
+                                        key={stat.label}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={inView ? { opacity: 1, y: 0 } : {}}
+                                        transition={{ delay: 0.6 + i * 0.1 }}
+                                        className="clay-card p-6 flex flex-col items-center justify-center text-center group hover:scale-[1.03] transition-transform duration-300"
+                                    >
+                                        <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} shadow-clay-pill flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300`}>
+                                            {stat.icon}
+                                        </div>
+                                        <p className="text-3xl font-extrabold text-text-primary mb-1">{stat.value}</p>
+                                        <p className="text-text-secondary text-xs uppercase tracking-wider font-bold">{stat.label}</p>
+                                    </motion.div>
                                 ))}
                             </motion.div>
                         </div>

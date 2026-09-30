@@ -6,23 +6,23 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="relative py-12 bg-[#020209] border-t border-white/5">
+        <footer className="relative py-12 bg-clay-surface border-t border-clay-highlight">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     {/* Logo */}
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="text-xl font-bold font-mono gradient-text"
+                        className="text-xl font-bold font-mono gradient-text px-4 py-2 bg-clay-bg rounded-full shadow-clay-input"
                     >
                         {'<OM />'}
                     </motion.div>
 
                     {/* Copyright */}
-                    <p className="text-slate-500 text-sm text-center">
+                    <p className="text-text-secondary font-bold text-sm text-center">
                         © {year} Om Maurya. Built with{' '}
-                        <span className="text-[#00f5ff]">Next.js</span>,{' '}
-                        <span className="text-[#bf00ff]">Framer Motion</span> &{' '}
-                        <span className="text-[#00ff88]">Firebase</span>
+                        <span className="text-accent-blue">Next.js</span>,{' '}
+                        <span className="text-accent-purple">Tailwind</span> &{' '}
+                        <span className="text-accent-green">Framer Motion</span>
                     </p>
 
                     {/* Links */}
@@ -37,8 +37,8 @@ export default function Footer() {
                                 href={link.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                whileHover={{ y: -2, color: '#00f5ff' }}
-                                className="text-slate-500 text-sm hover:text-[#00f5ff] transition-colors duration-200"
+                                whileHover={{ y: -2 }}
+                                className="px-4 py-2 rounded-full bg-[#E9EFF7] dark:bg-[#1e2434] shadow-clay-input text-text-secondary text-sm font-bold hover:text-accent-blue hover:shadow-clay-pill transition-all duration-300"
                             >
                                 {link.label}
                             </motion.a>
@@ -47,9 +47,9 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom line */}
-                <div className="mt-8 pt-6 border-t border-white/5 text-center">
-                    <p className="text-slate-600 text-xs font-mono">
-                        Designed & Developed by Om Maurya · Full Stack Developer
+                <div className="mt-8 pt-6 border-t border-[#E9EFF7] dark:border-[#1e2434] text-center">
+                    <p className="text-text-muted text-xs font-bold">
+                        Designed & Developed by Om Maurya • Full Stack Developer
                     </p>
                 </div>
             </div>
