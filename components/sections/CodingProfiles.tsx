@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, Code2, FolderOpen, Award, Trophy } from 'lucide-react';
+import { Code2, FolderOpen, Award, Trophy } from 'lucide-react';
+import { GithubIcon } from '@/components/ui/BrandIcons';
 
 function AnimatedCounter({ target, label, color, icon }: { target: number; label: string; color: string; icon: React.ReactNode }) {
     const [count, setCount] = useState(0);
@@ -82,7 +83,7 @@ export default function CodingProfiles() {
                     >
                         <h3 className="text-text-primary font-bold text-xl mb-6 flex items-center gap-3">
                             <div className="w-10 h-10 rounded-xl bg-[#e0f2fe] dark:bg-[#0369a1] text-accent-blue shadow-clay-pill flex items-center justify-center">
-                                <Github className="w-5 h-5" />
+                                <GithubIcon className="w-5 h-5" />
                             </div>
                             GitHub Stats
                         </h3>

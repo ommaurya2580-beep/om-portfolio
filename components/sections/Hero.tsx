@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Download, ArrowRight, Code2, Cloud, Shield, Database } from 'lucide-react';
+import { Mail, Download, ArrowRight, Code2, Cloud, Shield, Database } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 
 const socialLinks = [
-    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <Github className="w-5 h-5" />, color: '#2563EB' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <Linkedin className="w-5 h-5" />, color: '#06B6D4' },
+    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <GithubIcon className="w-5 h-5" />, color: '#2563EB' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <LinkedinIcon className="w-5 h-5" />, color: '#06B6D4' },
     { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', icon: <Code2 className="w-5 h-5" />, color: '#F59E0B' },
 ];
 

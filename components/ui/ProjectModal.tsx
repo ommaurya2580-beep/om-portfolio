@@ -3,7 +3,8 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '@/lib/firestore';
-import { X, ExternalLink, Github } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
+import { GithubIcon } from '@/components/ui/BrandIcons';
 
 interface ProjectModalProps {
     project: Project | null;
@@ -112,7 +113,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                             whileHover={{ y: -2 }}
                                             className="flex items-center gap-2 px-8 py-4 rounded-[20px] font-bold text-sm bg-clay-surface text-text-primary shadow-clay-btn transition-shadow"
                                         >
-                                            <Github className="w-5 h-5" />
+                                            <GithubIcon className="w-5 h-5" />
                                             View Source
                                         </motion.a>
                                     )}

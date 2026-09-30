@@ -5,11 +5,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
-import { MapPin, Briefcase, Send, Github, Linkedin, Code2 } from 'lucide-react';
+import { MapPin, Briefcase, Send, Code2 } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 
 const socialLinks = [
-    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <Github className="w-5 h-5" />, color: 'var(--blue)' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <Linkedin className="w-5 h-5" />, color: 'var(--cyan)' },
+    { label: 'GitHub', href: 'https://github.com/ommaurya2580-beep', icon: <GithubIcon className="w-5 h-5" />, color: 'var(--blue)' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/om-maurya-1b9540362', icon: <LinkedinIcon className="w-5 h-5" />, color: 'var(--cyan)' },
     { label: 'LeetCode', href: 'https://leetcode.com/u/Ommaurya07/', icon: <Code2 className="w-5 h-5" />, color: 'var(--orange)' },
 ];
 

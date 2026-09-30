@@ -7,7 +7,8 @@ import { Timestamp } from 'firebase/firestore';
 import { getProjects, type Project } from '@/lib/firestore';
 import ProjectModal from '@/components/ui/ProjectModal';
 import { ProjectCardSkeleton } from '@/components/ui/LoadingSkeleton';
-import { ExternalLink, Github, Lock, Layout, Star, GitFork, ArrowRight, Smartphone, Brain } from 'lucide-react';
+import { ExternalLink, Lock, Layout, Star, GitFork, ArrowRight, Smartphone, Brain } from 'lucide-react';
+import { GithubIcon } from '@/components/ui/BrandIcons';
 
 const categories = ['All', 'Web App', 'Mobile App', 'AI'];
 
@@ -266,7 +267,7 @@ export default function Projects() {
                                                             onClick={(e) => e.stopPropagation()}
                                                             className="text-sm font-bold text-text-secondary hover:text-accent-blue transition-colors flex items-center gap-1.5"
                                                         >
-                                                            <Github className="w-4 h-4" />
+                                                            <GithubIcon className="w-4 h-4" />
                                                             Code
                                                         </a>
                                                     )
